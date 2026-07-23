@@ -1,11 +1,43 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Hero from '../components/sections/Hero';
+import About from '../components/sections/About';
+import Experience from '../components/sections/Experience';
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Alberto García Martín | Ingeniero informático">
+  <Hero client:load />
+
+  <section id="sobre-mi" class="bg-carbon-light">
+    <About client:load />
+  </section>
+
+  <!-- 03 · PALMARÉS (placeholder, lo llenamos proyecto a proyecto) -->
+  <section id="proyectos" class="bg-carbon">
+    <div class="mx-auto max-w-4xl px-6 py-20 md:py-28">
+      <div class="flex items-center gap-3">
+        <span class="font-tech text-f1-red text-sm tracking-[0.3em]">03</span>
+        <span class="h-px w-12 bg-f1-red"></span>
+        <span class="font-tech text-silver text-sm tracking-[0.3em] uppercase">Proyectos</span>
+      </div>
+      <h2 class="font-tech text-3xl md:text-5xl font-black mt-6 text-white/25">PRÓXIMAMENTE</h2>
+    </div>
+  </section>
+
+  <!-- 04 · TRAYECTORIA -->
+  <section id="experiencia" class="bg-carbon-light">
+    <Experience client:load />
+  </section>
+
+  <!-- 05 · TEAM RADIO (placeholder) -->
+  <section id="contacto" class="bg-carbon">
+    <div class="mx-auto max-w-4xl px-6 py-20 md:py-28">
+      <div class="flex items-center gap-3">
+        <span class="font-tech text-f1-red text-sm tracking-[0.3em]">05</span>
+        <span class="h-px w-12 bg-f1-red"></span>
+        <span class="font-tech text-silver text-sm tracking-[0.3em] uppercase">Contacto</span>
+      </div>
+      <h2 class="font-tech text-3xl md:text-5xl font-black mt-6 text-white/25">PRÓXIMAMENTE</h2>
+    </div>
+  </section>
 </Layout>

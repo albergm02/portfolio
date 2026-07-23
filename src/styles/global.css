@@ -1,1 +1,50 @@
 @import "tailwindcss";
+
+@theme {
+  /* === PALETA FÓRMULA 1 === */
+  --color-f1-red: #E10600;          /* Rojo oficial F1 */
+  --color-f1-red-dark: #B00500;
+  --color-f1-red-light: #FF2800;    /* Rojo Ferrari */
+  --color-carbon: #0A0A0A;          /* Negro fibra de carbono */
+  --color-carbon-light: #141414;
+  --color-carbon-lighter: #1E1E1E;
+  --color-steel: #2A2A2A;
+  --color-silver: #A0A0A0;
+  --color-gold: #FFD700;            /* Dorado podio */
+
+  /* === FUENTES === */
+  --font-racing: 'Titillium Web', sans-serif;
+  --font-tech: 'Orbitron', monospace;
+}
+
+/* Scroll suave nativo (luego lo mejoramos con Lenis) */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4rem; /* = alto del navbar. ÚNICO mecanismo de offset */
+}
+
+body {
+  background-color: var(--color-carbon);
+  color: #fff;
+  font-family: var(--font-racing);
+  margin: 0;
+}
+
+/* Fondo con rayas diagonales sutiles estilo racing */
+.racing-bg {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 12px,
+    rgba(225, 6, 0, 0.025) 12px,
+    rgba(225, 6, 0, 0.025) 24px
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}
