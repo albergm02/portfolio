@@ -28,9 +28,9 @@ interface ButtonProps extends VariantProps<typeof buttonVariants> {
   className?: string;
   onClick?: () => void;
   type?: 'button' | 'submit' | 'reset';
-  download?: string | boolean; // 👈 NUEVO: fuerza la descarga del archivo
-  target?: string;             // 👈 NUEVO
-  rel?: string;                // 👈 NUEVO
+  download?: string | boolean; 
+  target?: string;             
+  rel?: string;               
 }
 
 function cn(...inputs: (string | undefined | null | false)[]) {

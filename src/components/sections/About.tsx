@@ -41,16 +41,18 @@ function Corner({ pos }: { pos: 'tl' | 'tr' | 'bl' | 'br' }) {
 
 export default function About() {
   return (
-    <div className="mx-auto max-w-6xl px-6 py-20 md:py-28 space-y-10">
+    /* ✅ FIX: px-5 en móvil (un pelín menos de padding para aprovechar el ancho) */
+    <div className="mx-auto max-w-6xl px-5 sm:px-6 py-16 sm:py-20 md:py-28 space-y-8 sm:space-y-10">
       <SectionLabel index="02" label="Perfil personal" />
 
       {/* TARJETA SUPERIOR: FOTO + IDENTIDAD */}
       <motion.div
-        className="grid gap-8 md:grid-cols-[260px_1fr] items-start bg-carbon-light border border-white/10 rounded-2xl p-6 md:p-8"
+        className="grid gap-8 md:grid-cols-[260px_1fr] items-start bg-carbon-light border border-white/10 rounded-2xl p-5 sm:p-6 md:p-8"
         initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="relative mx-auto md:mx-0 w-full max-w-65">
+        {/* ✅ FIX: max-w-[260px] y aspect-[4/5] (las clases max-w-65 / aspect-4/5 no son fiables) */}
+        <div className="relative mx-auto md:mx-0 w-full max-w-[260px]">
           <Corner pos="tl" /><Corner pos="tr" /><Corner pos="bl" /><Corner pos="br" />
           <div
             className="relative overflow-hidden border border-white/10 group"
@@ -60,19 +62,22 @@ export default function About() {
               src="/alberto.jpg"
               alt="Retrato profesional de Alberto García Martín"
               width={800} height={896} loading="lazy" decoding="async"
-              className="w-full aspect-4/5 object-cover object-top transition-transform duration-500 group-hover:scale-105"
+              className="w-full aspect-[4/5] object-cover object-top transition-transform duration-500 group-hover:scale-105"
             />
             <div className="absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-carbon to-transparent" />
           </div>
         </div>
 
-        <div className="space-y-5">
-          <h2 className="font-tech text-4xl md:text-5xl font-black leading-none">
+        <div className="space-y-4 sm:space-y-5">
+          {/* ✅ FIX: tamaño responsivo con saltos + text-balance para que no desborde en móvil */}
+          <h2 className="font-tech text-3xl sm:text-4xl md:text-5xl font-black leading-tight text-balance">
             ALBERTO <span className="text-f1-red">GARCÍA</span> MARTÍN
           </h2>
-          <p className="font-tech text-f1-red text-sm tracking-[0.25em] uppercase">Ingeniero Informático</p>
+          <p className="font-tech text-f1-red text-xs sm:text-sm tracking-[0.2em] sm:tracking-[0.25em] uppercase">
+            Ingeniero Informático
+          </p>
 
-          <p className="text-silver leading-relaxed max-w-2xl">
+          <p className="text-silver leading-relaxed max-w-2xl text-sm sm:text-base">
             Recién graduado en Ingeniería Informática con una sólida base analítica y pasión por la
             resolución de problemas tecnológicos. Durante mi formación he desarrollado una gran
             capacidad de adaptación y trabajo en equipo mediante metodologías ágiles. Busco mi primera
@@ -80,14 +85,14 @@ export default function About() {
             creciendo técnicamente y contribuir al éxito de proyectos innovadores.
           </p>
 
-          {/* 👇 CONTACTO PRIMERO, luego CTAs */}
-          <div className="flex flex-col items-start gap-4 pt-1">
+          {/* ✅ FIX: botones a ancho completo en móvil, en fila en desktop */}
+          <div className="flex flex-col items-stretch sm:items-start gap-4 pt-1">
             <ContactIcons size="md" />
-            <div className="flex flex-wrap gap-3">
-              <Button variant="primary" size="md" href="#proyectos">
+            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+              <Button variant="primary" size="md" href="#proyectos" className="w-full sm:w-auto">
                 Ver mis proyectos <ArrowRight className="w-4 h-4 ml-1" />
               </Button>
-              <Button variant="outline" size="md" href="/cv-alberto-garcia.pdf" download="CV-Alberto-Garcia-Martin.pdf">
+              <Button variant="outline" size="md" href="/cv-alberto-garcia.pdf" download="CV-Alberto-Garcia-Martin.pdf" className="w-full sm:w-auto">
                 <Download className="w-4 h-4 mr-1" /> Descargar CV
               </Button>
             </div>
@@ -97,7 +102,7 @@ export default function About() {
 
       <div className="grid gap-6 md:grid-cols-2">
         <motion.div
-          className="bg-carbon-light border border-white/10 rounded-2xl p-6 space-y-4"
+          className="bg-carbon-light border border-white/10 rounded-2xl p-5 sm:p-6 space-y-4"
           initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.6 }}
         >
@@ -129,11 +134,12 @@ export default function About() {
         </motion.div>
 
         <motion.div
-          className="bg-carbon-light border border-white/10 rounded-2xl p-6 space-y-3"
+          className="bg-carbon-light border border-white/10 rounded-2xl p-5 sm:p-6 space-y-3"
           initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }}
         >
-          <div className="flex items-center justify-between border-b border-white/10 pb-2">
+          {/* ✅ FIX: flex-wrap + gap para que el badge no choque con el título en móvil */}
+          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-2">
             <span className="font-tech text-xs tracking-[0.3em] text-silver">SOBRE MÍ</span>
             <span className="flex items-center gap-1.5 text-xs font-tech text-green-400">
               <span className="relative flex h-2 w-2">
@@ -143,18 +149,23 @@ export default function About() {
               BUSCANDO TRABAJO
             </span>
           </div>
+
+          {/* ✅ FIX CLAVE: en móvil cada dato se APILA (etiqueta arriba, valor debajo) y el email
+             se ve COMPLETO (break-words). En desktop vuelve a la fila con truncate. */}
           {COCKPIT.map(({ icon: Icon, label, value }) => (
-            <div key={label} className="flex items-center gap-3 text-sm">
-              <Icon className="w-4 h-4 text-f1-red shrink-0" />
-              <span className="text-silver w-24 shrink-0 font-tech text-[11px] tracking-wider uppercase">{label}</span>
-              <span className="text-white font-semibold truncate">{value}</span>
+            <div key={label} className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3 text-sm">
+              <span className="flex items-center gap-2 text-silver">
+                <Icon className="w-4 h-4 text-f1-red shrink-0" />
+                <span className="font-tech text-[11px] tracking-wider uppercase sm:w-20 sm:shrink-0">{label}</span>
+              </span>
+              <span className="text-white font-semibold break-words min-w-0 pl-6 sm:pl-0 sm:truncate">{value}</span>
             </div>
           ))}
         </motion.div>
       </div>
 
       <div className="flex justify-center">
-        <ScrollCue href="#proyectos" label="Proyectos personales" />
+        <ScrollCue href="#cv" label="Currículum" />
       </div>
     </div>
   );

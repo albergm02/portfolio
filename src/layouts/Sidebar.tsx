@@ -1,18 +1,19 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, User, Trophy, Gauge, Briefcase, Radio, Menu, X } from 'lucide-react';
+import { Home, User, Trophy, Gauge, Briefcase, Radio, Menu, X, FileText } from 'lucide-react';
 
 const navItems = [
-  { id: 'inicio', label: 'Inicio', icon: Home },
-  { id: 'sobre-mi', label: 'Sobre mí', icon: User },
-  { id: 'proyectos', label: 'Proyectos', icon: Trophy },
-  { id: 'experiencia', label: 'Experiencia', icon: Briefcase },
-  { id: 'contacto', label: 'Contacto', icon: Radio },
+  { id: 'inicio', label: 'Inicio', sub: 'Portada', icon: Home },
+  { id: 'sobre-mi', label: 'Sobre mí', sub: 'Perfil', icon: User },
+  { id: 'cv', label: 'Currículum', sub: 'CV completo', icon: FileText },  
+  { id: 'proyectos', label: 'Proyectos', sub: 'Portfolio', icon: Trophy },
+  { id: 'experiencia', label: 'Experiencia', sub: 'Trayectoria', icon: Briefcase },
+  { id: 'contacto', label: 'Contacto', sub: 'Escríbeme', icon: Radio },
 ];
 export default function Sidebar() {
   const [open, setOpen] = useState(false); // drawer en móvil
   const [active, setActive] = useState('inicio');
-
+  
   return (
     <>
       {/* Botón hamburguesa (solo móvil) */}
