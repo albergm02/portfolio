@@ -52,7 +52,7 @@ const PROYECTOS: Proyecto[] = [
     subtitulo: 'Servidor Linux Debian',
     anio: '2023',
     descripcion:
-      'Instalación, configuración y administración de un servidor Linux basado en Debian, diseñado para proveer servicios esenciales en una infraestructura académica y corporativa. La documentación técnica completa del montaje está disponible justo aquí, en el visor. De este proyecto se han adquirido conocimientos sobre el sistema Debian y de cómo montar un servidor desde cero, incluyendo la gestión de usuarios, permisos, servicios de red y seguridad. ',
+      'Instalación, configuración y administración de un servidor Linux basado en Debian. Implementación de servicios de red, gestión de usuarios y permisos, automatización de tareas mediante scripts Bash y aseguramiento del sistema mediante prácticas de seguridad y monitoreo.',
     tags: ['Linux', 'Debian', 'Bash', 'SSH', 'Servicios de red', 'SysAdmin'],
     pdfSrc: 'areya.pdf',  
     ancho: true,      
