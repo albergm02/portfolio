@@ -3,53 +3,6 @@ import { motion } from 'framer-motion';
 import { Mail } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '../components/icons/BrandIcons';
 
-/* === SEMÁFORO DE SALIDA F1 === */
-function StartLights() {
-  const [lit, setLit] = useState(0);
-
-  useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout>;
-    const runSequence = () => {
-      let col = 0;
-      setLit(0);
-      const lightUp = () => {
-        col++;
-        setLit(col);
-        if (col < 5) {
-          timeout = setTimeout(lightUp, 800);
-        } else {
-          timeout = setTimeout(() => {
-            setLit(0);
-            timeout = setTimeout(runSequence, 2500);
-          }, 1200 + Math.random() * 1800);
-        }
-      };
-      timeout = setTimeout(lightUp, 800);
-    };
-    runSequence();
-    return () => clearTimeout(timeout);
-  }, []);
-
-  return (
-    <div className="hidden lg:flex items-center gap-1 bg-black/60 px-2 py-1.5 rounded border border-white/10">
-      {[1, 2, 3, 4, 5].map((col) => (
-        <div key={col} className="flex flex-col gap-0.5">
-          {[0, 1].map((row) => (
-            <div
-              key={row}
-              className={`w-2 h-2 rounded-full transition-all duration-150 ${
-                lit >= col
-                  ? 'bg-f1-red shadow-[0_0_8px_2px_rgba(225,6,0,0.7)]'
-                  : 'bg-f1-red/15'
-              }`}
-            />
-          ))}
-        </div>
-      ))}
-    </div>
-  );
-}
-
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
@@ -82,15 +35,6 @@ export default function Navbar() {
 
       {/* Semáforo + estado + redes (con TUS enlaces reales) */}
       <div className="flex items-center gap-6">
-        <StartLights />
-
-        <div className="hidden sm:flex items-center gap-2 text-xs font-tech tracking-wider">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
-          </span>
-          <span className="text-silver">BUSCANDO PUESTO DE TRABAJO</span>
-        </div>
 
         <div className="hidden md:flex items-center gap-4">
           <a

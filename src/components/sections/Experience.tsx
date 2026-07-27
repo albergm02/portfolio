@@ -109,7 +109,7 @@ export default function Experience() {
             <div>
               <p className="font-tech text-white font-bold tracking-wide">2026 - ACTUALMENTE</p>
               <p className="text-sm text-silver">
-                Buscando mi próximo trabajo como desarrollador web.
+                Buscando mi próximo trabajo como desarrollador web o dentro de la ciberseguridad, aunque estoy abierto a todo.
               </p>
             </div>
             <a

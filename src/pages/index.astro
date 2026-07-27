@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Hero from '../components/sections/Hero';
 import About from '../components/sections/About';
 import Curriculum from '../components/sections/Curriculum';
+import Projects from '../components/sections/Projects';
 import Experience from '../components/sections/Experience';
 import Contact from '../components/sections/Contact';
 ---
@@ -20,16 +21,9 @@ import Contact from '../components/sections/Contact';
     <Curriculum client:only="react" />
   </section>
 
-  <!-- 04 · PROYECTOS (placeholder, lo llenamos proyecto a proyecto) -->
+  <!-- 04 · PROYECTOS -->
   <section id="proyectos" class="bg-carbon-light">
-    <div class="mx-auto max-w-4xl px-5 sm:px-6 py-16 sm:py-20 md:py-28">
-      <div class="flex items-center gap-3">
-        <span class="font-tech text-f1-red text-sm tracking-[0.3em]">04</span>
-        <span class="h-px w-12 bg-f1-red"></span>
-        <span class="font-tech text-silver text-sm tracking-[0.3em] uppercase">Proyectos</span>
-      </div>
-      <h2 class="font-tech text-3xl md:text-5xl font-black mt-6 text-white/25">PRÓXIMAMENTE</h2>
-    </div>
+    <Projects client:only="react" />
   </section>
 
   <!-- 05 · TRAYECTORIA -->
