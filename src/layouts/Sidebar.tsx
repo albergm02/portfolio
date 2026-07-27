@@ -16,14 +16,9 @@ export default function Sidebar() {
   
   return (
     <>
-      {/* Botón hamburguesa (solo móvil) */}
-      <button
-        onClick={() => setOpen(true)}
-        className="md:hidden fixed top-20 left-4 z-50 p-2 bg-f1-red rounded text-white shadow-lg"
-        aria-label="Abrir menú"
-      >
-        <Menu className="w-6 h-6" />
-        <AnimatePresence>
+      {/* Botón hamburguesa (solo móvil).
+      Se OCULTA cuando el menú está abierto (open) para no tapar la barra lateral. */}
+      <AnimatePresence>
         {!open && (
           <motion.button
             key="menu-toggle"
@@ -39,8 +34,6 @@ export default function Sidebar() {
           </motion.button>
         )}
       </AnimatePresence>
-      </button>
-
       {/* Overlay oscuro detrás del drawer en móvil */}
       <AnimatePresence>
         {open && (
