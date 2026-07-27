@@ -4,7 +4,6 @@ import {
   ChevronLeft, ChevronRight, ZoomIn, ZoomOut, FileWarning,
 } from 'lucide-react';
 
-
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 function Spinner({ label = 'Cargando documento…' }: { label?: string }) {
@@ -23,7 +22,9 @@ function useElementWidth() {
     const el = ref.current;
     if (!el) return;
     const ro = new ResizeObserver((entries) => {
-      setWidth(Math.floor(entries[0]?.contentRect.width ?? 0));
+      const w = Math.floor(entries[0]?.contentRect.width ?? 0);
+      // ✅ FIX: solo actualizo si el ancho realmente cambia → evita re-renders en bucle
+      setWidth((prev) => (prev === w ? prev : w));
     });
     ro.observe(el);
     return () => ro.disconnect();
@@ -31,11 +32,6 @@ function useElementWidth() {
   return { ref, width };
 }
 
-/**
- * Visor de PDF reutilizable: pinta UNA página con paginación y zoom, responsive.
- * @param pdfUrl  Ruta del PDF en /public (ej. '/docs/areya.pdf').
- * @param scrollClass  Clases de altura/scroll del área del documento (lo decide el padre).
- */
 export function PdfViewer({ pdfUrl, scrollClass }: { pdfUrl: string; scrollClass: string }) {
   const { ref, width } = useElementWidth();
   const [numPages, setNumPages] = useState<number | null>(null);
@@ -70,7 +66,7 @@ export function PdfViewer({ pdfUrl, scrollClass }: { pdfUrl: string; scrollClass
   }
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full min-w-0">
       {/* barra de controles */}
       <div className="flex items-center justify-between gap-2 px-3 py-2.5 bg-black/40 border-b border-white/10 font-tech text-xs tracking-wider">
         <div className="flex items-center gap-1">
@@ -99,8 +95,17 @@ export function PdfViewer({ pdfUrl, scrollClass }: { pdfUrl: string; scrollClass
         </div>
       </div>
 
-      {/* área del documento */}
-      <div ref={ref} className={`overflow-auto bg-black/30 ${scrollClass}`}>
+      {/* ✅ FIX: el padding va AQUÍ (en el contenedor que se mide), no en el hijo.
+         Así contentRect.width ya descuenta el padding y el canvas cabe exacto.
+         min-w-0 → permite encogerse dentro del grid/flex padre.
+         overflow-x-hidden en zoom normal → sin scroll horizontal fantasma;
+         overflow-x-auto solo cuando haces zoom y el PDF es más ancho que la pantalla. */}
+      <div
+        ref={ref}
+        className={`min-w-0 bg-black/30 p-3 sm:p-5 overflow-y-auto ${
+          zoom <= 1 ? 'overflow-x-hidden' : 'overflow-x-auto'
+        } ${scrollClass}`}
+      >
         {width > 0 && (
           <Document
             file={pdfUrl}
@@ -113,7 +118,8 @@ export function PdfViewer({ pdfUrl, scrollClass }: { pdfUrl: string; scrollClass
             loading={<Spinner />}
             error={<></>}
           >
-            <div className="flex justify-center p-3 sm:p-5">
+            {/* ✅ FIX: sin padding aquí (lo movimos al ref) y w-full para que no añada ancho */}
+            <div className="flex justify-center w-full">
               <Page
                 pageNumber={pageNumber}
                 width={renderWidth}

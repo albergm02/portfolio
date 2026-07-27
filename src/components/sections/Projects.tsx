@@ -18,8 +18,8 @@ const PROYECTOS: Proyecto[] = [
     tags: ['Vue 3', 'Firebase', 'OpenF1 API', 'PWA', 'Vite', 'Pinia', 'Tailwind CSS', 'Zod', 'Cloud Functions'],
     repo: 'https://github.com/albergm02/Formula1_Fantasy',
     demoEnVivo: 'https://formula1-fantasy-ba348.web.app/',
-    videoSrc: 'F1Fantasy.mp4',   
-    posterSrc: 'f1fantasy.png',  
+    videoSrc: '/F1Fantasy.mp4',   
+    posterSrc: '/f1fantasy.png',  
     destacado: true,      
   },
   {
@@ -31,8 +31,8 @@ const PROYECTOS: Proyecto[] = [
       'Programación a bajo nivel y gestión de la concurrencia del sistema mediante la sincronización de procesos en una aplicación de consola en C++, además de la creación, compilación y consumo de librerías de enlace dinámico (DLL).',
     tags: ['C++', 'std::thread', 'std::mutex', 'Semáforos', 'CreateEvent', 'DLLs', 'Win32'],
     repo: 'https://github.com/albergm02/ThePerchRoute',
-    videoSrc: 'thePerchRoute.mp4',
-    posterSrc: 'filosofos.png',
+    videoSrc: '/thePerchRoute.mp4',
+    posterSrc: '/filosofos.png',
   },
   {
     id: 'el-pactometro',
@@ -43,8 +43,8 @@ const PROYECTOS: Proyecto[] = [
       'Aplicación de escritorio WPF diseñada para la visualización y el análisis de procesos electorales en España. Integra herramientas gráficas para la gestión de datos, la comparación de resultados históricos y la simulación de escenarios de coalición.',
     tags: ['C#', 'WPF', '.NET', 'XAML', 'Visualización de datos'],
     repo: 'https://github.com/albergm02/ElPactometro',
-    videoSrc: 'pactometro.mp4',
-    posterSrc: 'pactometro.png',
+    videoSrc: '/pactometro.mp4',
+    posterSrc: '/pactometro.png',
   },
   {
     id: 'areya',
@@ -54,7 +54,7 @@ const PROYECTOS: Proyecto[] = [
     descripcion:
       'Instalación, configuración y administración de un servidor Linux basado en Debian. Implementación de servicios de red, gestión de usuarios y permisos, automatización de tareas mediante scripts Bash y aseguramiento del sistema mediante prácticas de seguridad y monitoreo.',
     tags: ['Linux', 'Debian', 'Bash', 'SSH', 'Servicios de red', 'SysAdmin'],
-    pdfSrc: 'areya.pdf',  
+    pdfSrc: '/areya.pdf',  
     ancho: true,      
   },
   // 👇 Próximo turno: TFG con destacado: true + demoEnVivo.

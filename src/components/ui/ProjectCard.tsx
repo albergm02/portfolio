@@ -83,7 +83,8 @@ export function ProjectCard({ p }: { p: Proyecto }) {
 
   /* ===== CONTENIDO (título + año + desc + tags + CTAs) ===== */
   const Contenido = (extra = '') => (
-    <div className={`flex flex-col flex-1 p-5 sm:p-6 ${extra}`}>
+    /* ✅ FIX C: min-w-0 → permite que esta columna se encoja dentro del grid y no deforme su ancho */
+    <div className={`flex flex-col flex-1 p-5 sm:p-6 min-w-0 ${extra}`}>
       <div className="flex items-start justify-between gap-3">
         <div>
           <h3 className="font-tech text-xl sm:text-2xl font-black text-white leading-tight">{p.titulo}</h3>
@@ -158,9 +159,11 @@ export function ProjectCard({ p }: { p: Proyecto }) {
       >
         {tienePdf ? (
           /* LAYOUT DOCUMENTO (Areya): contenido + visor */
-          <div className="grid lg:grid-cols-2 flex-1">
+          /* ✅ FIX A: min-w-0 en el grid → sus columnas pueden encogerse al ancho real de la tarjeta */
+          <div className="grid lg:grid-cols-2 flex-1 min-w-0">
             {Contenido()}
-            <div className="flex flex-col border-t lg:border-t-0 lg:border-l border-white/10 min-h-[420px]">
+            {/* ✅ FIX B: min-w-0 + overflow-hidden → el visor no desborda ni empuja a la columna de texto */}
+            <div className="flex flex-col border-t lg:border-t-0 lg:border-l border-white/10 min-h-[420px] min-w-0 overflow-hidden">
               <div className="flex items-center justify-between gap-2 px-3 py-2 bg-black/50 border-b border-white/10">
                 <span className="font-tech text-[11px] tracking-[0.3em] text-silver">DOCUMENTACIÓN</span>
                 <div className="flex items-center gap-1">
