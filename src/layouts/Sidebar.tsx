@@ -23,10 +23,7 @@ export default function Sidebar() {
         aria-label="Abrir menú"
       >
         <Menu className="w-6 h-6" />
-      </button>
-
-      {/* Overlay oscuro detrás del drawer en móvil */}
-      <AnimatePresence>
+        <AnimatePresence>
         {!open && (
           <motion.button
             key="menu-toggle"
@@ -40,6 +37,20 @@ export default function Sidebar() {
           >
             <Menu className="w-6 h-6" />
           </motion.button>
+        )}
+      </AnimatePresence>
+      </button>
+
+      {/* Overlay oscuro detrás del drawer en móvil */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setOpen(false)}
+            className="md:hidden fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
+          />
         )}
       </AnimatePresence>
 
