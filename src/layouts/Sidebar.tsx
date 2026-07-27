@@ -27,14 +27,19 @@ export default function Sidebar() {
 
       {/* Overlay oscuro detrás del drawer en móvil */}
       <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setOpen(false)}
-            className="md:hidden fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
-          />
+        {!open && (
+          <motion.button
+            key="menu-toggle"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.2 }}
+            onClick={() => setOpen(true)}
+            className="md:hidden fixed top-20 left-4 z-50 p-2 bg-f1-red rounded text-white shadow-lg active:scale-95 transition-transform"
+            aria-label="Abrir menú"
+          >
+            <Menu className="w-6 h-6" />
+          </motion.button>
         )}
       </AnimatePresence>
 
