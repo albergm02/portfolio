@@ -1,20 +1,24 @@
 @import "tailwindcss";
 
 @theme {
-  /* === PALETA FÓRMULA 1 === */
-  --color-f1-red: #E10600;          /* Rojo oficial F1 */
-  --color-f1-red-dark: #B00500;
-  --color-f1-red-light: #FF2800;    /* Rojo Ferrari */
-  --color-carbon: #0A0A0A;          /* Negro fibra de carbono */
-  --color-carbon-light: #141414;
-  --color-carbon-lighter: #1E1E1E;
-  --color-steel: #2A2A2A;
-  --color-silver: #A0A0A0;
-  --color-gold: #FFD700;            /* Dorado podio */
+  /* Fondos — negros profundos y grises sutiles, muy clean */
+  --color-carbon: #09090B;          /* fondo principal */
+  --color-carbon-light: #131316;    /* tarjetas / secciones alternas */
+  --color-carbon-lighter: #1C1C21;  /* hovers y elementos elevados */
 
-  /* === FUENTES === */
-  --font-racing: 'Titillium Web', sans-serif;
-  --font-tech: 'Orbitron', monospace;
+  /* Acento — esmeralda sofisticado (cámbialo aquí si prefieres otro) */
+  --color-f1-red: #10B981;          /* acento principal */
+  --color-f1-red-dark: #059669;     /* hover del acento */
+
+  /* Textos */
+  --color-white: #FAFAFA;           /* texto principal (blanco suave, no puro) */
+  --color-silver: #A1A1AA;          /* texto secundario */
+  --color-gold: #F59E0B;            /* detalle cálido (ámbar) */
+
+  /* Tipografía — limpia y moderna, nada F1 */
+  --font-tech: 'Space Grotesk', sans-serif;  /* títulos y labels */
+  --font-sans: 'Inter', sans-serif;          /* cuerpo de texto */
+  --font-mono: 'JetBrains Mono', monospace;  /* detalles técnicos */
 }
 
 /* Scroll suave nativo (luego lo mejoramos con Lenis) */
@@ -26,19 +30,14 @@ html {
 body {
   background-color: var(--color-carbon);
   color: #fff;
-  font-family: var(--font-racing);
+  font-family: var(--font-sans);
   margin: 0;
 }
 
-/* Fondo con rayas diagonales sutiles estilo racing */
+/* Fondo con patrón de puntos muy sutil (textura limpia, nada F1) */
 .racing-bg {
-  background-image: repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent 12px,
-    rgba(225, 6, 0, 0.025) 12px,
-    rgba(225, 6, 0, 0.025) 24px
-  );
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 32px 32px;
 }
 
 @media (prefers-reduced-motion: reduce) {

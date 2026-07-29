@@ -29,19 +29,8 @@ const COCKPIT = [
   { icon: Fingerprint, label: 'ORCID', value: '0009-0008-9008-1030' },
 ];
 
-function Corner({ pos }: { pos: 'tl' | 'tr' | 'bl' | 'br' }) {
-  const map = {
-    tl: 'top-0 left-0 border-t-2 border-l-2',
-    tr: 'top-0 right-0 border-t-2 border-r-2',
-    bl: 'bottom-0 left-0 border-b-2 border-l-2',
-    br: 'bottom-0 right-0 border-b-2 border-r-2',
-  } as const;
-  return <span className={`absolute w-5 h-5 border-f1-red ${map[pos]}`} />;
-}
-
 export default function About() {
   return (
-    /* ✅ FIX: px-5 en móvil (un pelín menos de padding para aprovechar el ancho) */
     <div className="mx-auto max-w-6xl px-5 sm:px-6 py-16 sm:py-20 md:py-28 space-y-8 sm:space-y-10">
       <SectionLabel index="02" label="Perfil personal" />
 
@@ -51,25 +40,20 @@ export default function About() {
         initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       >
-        {/* ✅ FIX: max-w-[260px] y aspect-[4/5] (las clases max-w-65 / aspect-4/5 no son fiables) */}
+        {/* ✅ Foto CLEAN: sin esquinas F1, sin recorte clip-path, sin gradiente.
+             Solo bordes redondeados, borde sutil y un zoom muy suave al pasar el ratón. */}
         <div className="relative mx-auto md:mx-0 w-full max-w-[260px]">
-          <Corner pos="tl" /><Corner pos="tr" /><Corner pos="bl" /><Corner pos="br" />
-          <div
-            className="relative overflow-hidden border border-white/10 group"
-            style={{ clipPath: 'polygon(0 0, 100% 0, 100% 88%, 88% 100%, 0 100%)' }}
-          >
+          <div className="relative overflow-hidden rounded-2xl border border-white/10 group">
             <img
               src="/alberto.jpg"
               alt="Retrato profesional de Alberto García Martín"
               width={800} height={896} loading="lazy" decoding="async"
-              className="w-full aspect-[4/5] object-cover object-top transition-transform duration-500 group-hover:scale-105"
+              className="w-full aspect-[4/5] object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
             />
-            <div className="absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-carbon to-transparent" />
           </div>
         </div>
 
         <div className="space-y-4 sm:space-y-5">
-          {/* ✅ FIX: tamaño responsivo con saltos + text-balance para que no desborde en móvil */}
           <h2 className="font-tech text-3xl sm:text-4xl md:text-5xl font-black leading-tight text-balance">
             ALBERTO <span className="text-f1-red">GARCÍA</span> MARTÍN
           </h2>
@@ -85,7 +69,6 @@ export default function About() {
             creciendo técnicamente y contribuir al éxito de proyectos innovadores.
           </p>
 
-          {/* ✅ FIX: botones a ancho completo en móvil, en fila en desktop */}
           <div className="flex flex-col items-stretch sm:items-start gap-4 pt-1">
             <ContactIcons size="md" />
             <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
@@ -138,7 +121,6 @@ export default function About() {
           initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }}
         >
-          {/* ✅ FIX: flex-wrap + gap para que el badge no choque con el título en móvil */}
           <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-2">
             <span className="font-tech text-xs tracking-[0.3em] text-silver">SOBRE MÍ</span>
             <span className="flex items-center gap-1.5 text-xs font-tech text-green-400">
@@ -150,8 +132,6 @@ export default function About() {
             </span>
           </div>
 
-          {/* ✅ FIX CLAVE: en móvil cada dato se APILA (etiqueta arriba, valor debajo) y el email
-             se ve COMPLETO (break-words). En desktop vuelve a la fila con truncate. */}
           {COCKPIT.map(({ icon: Icon, label, value }) => (
             <div key={label} className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3 text-sm">
               <span className="flex items-center gap-2 text-silver">
