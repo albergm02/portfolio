@@ -23,6 +23,18 @@ const PROYECTOS: Proyecto[] = [
     destacado: true,      
   },
   {
+  id: 'security-systems',
+  titulo: 'Security Systems',
+  subtitulo: 'Proyecto de ciberseguridad',
+  anio: '2025', 
+  descripcion:
+    'Proyecto centrado en la seguridad de sistemas y redes.',
+  tags: ['Ciberseguridad'],
+  repo: 'https://github.com/albergm02/Security-Systems',
+  posterSrc: 'sec.png',   
+  destacado: true, 
+  },
+  {
     id: 'perch-route',
     titulo: 'La Ruta de la Pesca',
     subtitulo: 'Sincronización de procesos',
