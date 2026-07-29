@@ -75,7 +75,7 @@ export function ProjectCard({ p }: { p: Proyecto }) {
         </button>
       ) : (
         <span className="absolute top-3 left-3 z-20 font-tech text-[10px] tracking-[0.2em] text-silver bg-black/50 backdrop-blur-sm border border-white/15 rounded-full px-2.5 py-0.5">
-          DEMO PRONTO
+          SIN DEMO
         </span>
       )}
     </div>
