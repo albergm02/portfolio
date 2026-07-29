@@ -62,14 +62,13 @@ const PROYECTOS: Proyecto[] = [
     id: 'areya',
     titulo: 'Areya',
     subtitulo: 'Servidor Linux Debian',
-    anio: '2023',
+    anio: '2024',
     descripcion:
       'Instalación, configuración y administración de un servidor Linux basado en Debian. Implementación de servicios de red, gestión de usuarios y permisos, automatización de tareas mediante scripts Bash y aseguramiento del sistema mediante prácticas de seguridad y monitoreo.',
     tags: ['Linux', 'Debian', 'Bash', 'SSH', 'Servicios de red', 'SysAdmin'],
     pdfSrc: '/areya.pdf',  
     ancho: true,      
   },
-  // 👇 Próximo turno: TFG con destacado: true + demoEnVivo.
 ];
 
 export default function Projects() {

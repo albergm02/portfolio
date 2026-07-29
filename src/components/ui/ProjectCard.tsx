@@ -127,7 +127,7 @@ export function ProjectCard({ p }: { p: Proyecto }) {
         )}
         {!tieneApp && !tieneVideo && !tienePdf && (
           <span className="flex items-center gap-1.5 px-4 py-2 rounded-lg border border-white/10 text-silver/50 font-tech text-xs tracking-wider cursor-not-allowed">
-            <Play className="w-3.5 h-3.5" /> Demo pronto
+            <Play className="w-3.5 h-3.5" /> Sin demo
           </span>
         )}
         {p.repo && (
