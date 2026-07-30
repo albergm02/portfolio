@@ -25,14 +25,14 @@ const PROYECTOS: Proyecto[] = [
   {
   id: 'security-systems',
   titulo: 'Security Systems',
-  subtitulo: 'Criptografía · Redes · Hardening',
-  anio: '2025',
+  subtitulo: 'Proyecto de ciberseguridad',
+  anio: '2025', 
   descripcion:
-    'Repositorio completo con 8 prácticas hands-on de ciberseguridad: criptografía simétrica y asimétrica (DES, AES, RC2, RSA, ElGamal), intercambio seguro de claves, firmas digitales y hash (SHA256) con OpenSSL y GnuPG. Configuración de servidores HTTPS con Apache y CA propia, análisis del handshake TLS, certificados digitales y criptografía de curva elíptica (ECC). Hardening de sistemas operativos: gestión de usuarios, logs, parches e integridad de archivos. Seguridad en redes con iptables, reglas de cortafuegos, análisis de servicios y simulación controlada de ataques DoS.',
-  tags: ['OpenSSL', 'GnuPG', 'iptables', 'TLS/HTTPS', 'RSA', 'AES', 'Apache2', 'Criptografía', 'Hardening', 'Firewalls'],
+    'Proyecto centrado en la seguridad de sistemas y redes.',
+  tags: ['Ciberseguridad'],
   repo: 'https://github.com/albergm02/Security-Systems',
-  posterSrc: 'sec.png',
-  destacado: true,
+  posterSrc: 'sec.png',   
+  destacado: true, 
   },
   {
     id: 'perch-route',
@@ -77,12 +77,12 @@ export default function Projects() {
       <SectionLabel index="04" label="Proyectos" />
 
       <h2 className="font-tech text-3xl md:text-5xl font-black mt-6 leading-tight text-balance">
-        PROYECTOS <span className="text-cyber">DESTACADOS</span>
+        PROYECTOS <span className="text-f1-red">DESTACADOS</span>
       </h2>
       <p className="text-silver mt-3 max-w-2xl text-sm sm:text-base">
-        Proyectos que demuestran mi base técnica: desde <span className="text-cyber">ciberseguridad y
-        criptografía</span> hasta aplicaciones full-stack y sistemas a bajo nivel. Cada repositorio
-        incluye mi código y documentación.
+        Una selección de lo que he construido: desde concurrencia y sistemas a bajo nivel hasta
+        aplicaciones web full-stack. Pulsa <span className="text-f1-red">Ver demo</span> para
+        verlo en acción o <span className="text-f1-red">Ver código</span> para entrar al repositorio.
       </p>
 
       <div className="grid gap-6 mt-10 md:grid-cols-2">

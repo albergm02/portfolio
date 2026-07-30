@@ -9,8 +9,8 @@ export function SectionLabel({ index, label }: { index: string; label: string })
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
     >
-      <span className="font-tech text-cyber text-sm tracking-[0.3em]">{index}</span>
-      <span className="h-px w-12 bg-cyber" />
+      <span className="font-tech text-f1-red text-sm tracking-[0.3em]">{index}</span>
+      <span className="h-px w-12 bg-f1-red" />
       <span className="font-tech text-silver text-sm tracking-[0.3em] uppercase">{label}</span>
     </motion.div>
   );

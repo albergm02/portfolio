@@ -27,7 +27,7 @@ export default function Sidebar() {
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.2 }}
             onClick={() => setOpen(true)}
-            className="md:hidden fixed top-20 left-4 z-50 p-2 bg-cyber rounded text-white shadow-lg active:scale-95 transition-transform"
+            className="md:hidden fixed top-20 left-4 z-50 p-2 bg-f1-red rounded text-white shadow-lg active:scale-95 transition-transform"
             aria-label="Abrir menú"
           >
             <Menu className="w-6 h-6" />
@@ -79,19 +79,19 @@ export default function Sidebar() {
                 transition={{ delay: 0.1 + i * 0.08 }}
                 className={`group relative flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${
                   isActive
-                    ? 'bg-cyber/10 text-white'
+                    ? 'bg-f1-red/10 text-white'
                     : 'text-silver hover:text-white hover:bg-white/5'
                 }`}
               >
                 {/* Barra roja que crece al activar/hover */}
                 <span
-                  className={`absolute left-0 top-1/2 -translate-y-1/2 w-1 rounded-full bg-cyber transition-all duration-300 ${
+                  className={`absolute left-0 top-1/2 -translate-y-1/2 w-1 rounded-full bg-f1-red transition-all duration-300 ${
                     isActive ? 'h-8' : 'h-0 group-hover:h-6'
                   }`}
                 />
                 <Icon
                   className={`w-5 h-5 shrink-0 transition-colors ${
-                    isActive ? 'text-cyber' : 'text-silver group-hover:text-cyber'
+                    isActive ? 'text-f1-red' : 'text-silver group-hover:text-f1-red'
                   }`}
                 />
                 <div className="leading-tight">

@@ -51,7 +51,7 @@ export function ProjectCard({ p }: { p: Proyecto }) {
   const tagsVisibles = p.tags.slice(0, 4);
   const tagsSobrantes = p.tags.length - tagsVisibles.length;
   const cardSpan = (p.ancho || p.destacado) ? 'md:col-span-2' : '';
-  const cardRing = p.destacado ? 'ring-1 ring-cyber/40' : '';
+  const cardRing = p.destacado ? 'ring-1 ring-f1-red/40' : '';
 
   /* ===== MEDIA (thumbnail con poster/placeholder + Play) ===== */
   const Media = (extra = '') => (
@@ -69,7 +69,7 @@ export function ProjectCard({ p }: { p: Proyecto }) {
       {muestraPlay ? (
         <button onClick={onPlay} aria-label={tieneVideo ? 'Ver demo' : 'Abrir aplicación'}
           className="absolute inset-0 z-10 flex items-center justify-center">
-          <span className="flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/15 backdrop-blur-sm border border-white/50 transition-all duration-300 group-hover:bg-cyber group-hover:border-cyber group-hover:scale-110">
+          <span className="flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/15 backdrop-blur-sm border border-white/50 transition-all duration-300 group-hover:bg-f1-red group-hover:border-f1-red group-hover:scale-110">
             <Play className="w-6 h-6 text-white ml-0.5" fill="currentColor" />
           </span>
         </button>
@@ -88,7 +88,7 @@ export function ProjectCard({ p }: { p: Proyecto }) {
       <div className="flex items-start justify-between gap-3">
         <div>
           <h3 className="font-tech text-xl sm:text-2xl font-black text-white leading-tight">{p.titulo}</h3>
-          {p.subtitulo && <p className="font-tech text-cyber text-xs tracking-[0.2em] uppercase mt-1">{p.subtitulo}</p>}
+          {p.subtitulo && <p className="font-tech text-f1-red text-xs tracking-[0.2em] uppercase mt-1">{p.subtitulo}</p>}
         </div>
         {p.anio && (
           <span className="shrink-0 font-tech text-xs text-silver border border-white/15 rounded-full px-2.5 py-0.5">{p.anio}</span>
@@ -102,26 +102,26 @@ export function ProjectCard({ p }: { p: Proyecto }) {
         {tagsVisibles.map((t) => (
           <span key={t} className="px-2.5 py-1 text-[11px] font-tech tracking-wide border border-white/10 rounded text-white/80">{t}</span>
         ))}
-        {tagsSobrantes > 0 && <span className="px-2.5 py-1 text-[11px] font-tech text-cyber">+{tagsSobrantes}</span>}
+        {tagsSobrantes > 0 && <span className="px-2.5 py-1 text-[11px] font-tech text-f1-red">+{tagsSobrantes}</span>}
       </div>
 
       {/* CTAs: cada acción disponible por separado */}
       <div className="flex flex-wrap gap-2 mt-5">
         {tieneApp && (
           <a href={p.demoEnVivo} target="_blank" rel="noopener noreferrer"
-             className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-cyber text-white font-tech text-xs tracking-wider hover:bg-cyber-dark transition-colors">
+             className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-f1-red text-white font-tech text-xs tracking-wider hover:bg-f1-red-dark transition-colors">
             <Play className="w-3.5 h-3.5" /> Abrir app
           </a>
         )}
         {tieneVideo && (
           <button onClick={() => setDemoOpen(true)}
-             className="flex items-center gap-1.5 px-4 py-2 rounded-lg border border-cyber/60 text-cyber hover:bg-cyber hover:text-white font-tech text-xs tracking-wider transition-colors">
+             className="flex items-center gap-1.5 px-4 py-2 rounded-lg border border-f1-red/60 text-f1-red hover:bg-f1-red hover:text-white font-tech text-xs tracking-wider transition-colors">
             <Play className="w-3.5 h-3.5" /> Ver demo
           </button>
         )}
         {tienePdf && (
           <button onClick={() => setPdfOpen(true)}
-             className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-cyber text-white font-tech text-xs tracking-wider hover:bg-cyber-dark transition-colors">
+             className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-f1-red text-white font-tech text-xs tracking-wider hover:bg-f1-red-dark transition-colors">
             <Maximize2 className="w-3.5 h-3.5" /> Ver documento
           </button>
         )}
@@ -132,13 +132,13 @@ export function ProjectCard({ p }: { p: Proyecto }) {
         )}
         {p.repo && (
           <a href={p.repo} target="_blank" rel="noopener noreferrer"
-             className="flex items-center gap-1.5 px-4 py-2 rounded-lg border border-white/15 text-silver hover:text-cyber hover:border-cyber font-tech text-xs tracking-wider transition-colors">
+             className="flex items-center gap-1.5 px-4 py-2 rounded-lg border border-white/15 text-silver hover:text-f1-red hover:border-f1-red font-tech text-xs tracking-wider transition-colors">
             <GithubIcon className="w-3.5 h-3.5" /> Ver código
           </a>
         )}
         {p.pdfSrc && (
           <a href={p.pdfSrc} download
-             className="flex items-center gap-1.5 px-4 py-2 rounded-lg border border-white/15 text-silver hover:text-cyber hover:border-cyber font-tech text-xs tracking-wider transition-colors">
+             className="flex items-center gap-1.5 px-4 py-2 rounded-lg border border-white/15 text-silver hover:text-f1-red hover:border-f1-red font-tech text-xs tracking-wider transition-colors">
             <Download className="w-3.5 h-3.5" /> Descargar PDF
           </a>
         )}
@@ -168,9 +168,9 @@ export function ProjectCard({ p }: { p: Proyecto }) {
                 <span className="font-tech text-[11px] tracking-[0.3em] text-silver">DOCUMENTACIÓN</span>
                 <div className="flex items-center gap-1">
                   <a href={p.pdfSrc} target="_blank" rel="noopener noreferrer" aria-label="Abrir en pestaña nueva"
-                     className="p-1.5 rounded text-silver hover:text-cyber transition-colors"><ExternalLink className="w-4 h-4" /></a>
+                     className="p-1.5 rounded text-silver hover:text-f1-red transition-colors"><ExternalLink className="w-4 h-4" /></a>
                   <button onClick={() => setPdfOpen(true)} aria-label="Pantalla completa"
-                     className="p-1.5 rounded text-silver hover:text-cyber transition-colors"><Maximize2 className="w-4 h-4" /></button>
+                     className="p-1.5 rounded text-silver hover:text-f1-red transition-colors"><Maximize2 className="w-4 h-4" /></button>
                 </div>
               </div>
               <PdfViewer pdfUrl={p.pdfSrc!} scrollClass="h-[380px] lg:h-[460px]" />
@@ -200,8 +200,8 @@ export function ProjectCard({ p }: { p: Proyecto }) {
               initial={{ opacity: 0, scale: 0.96, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.96, y: 20 }}
               transition={{ duration: 0.25 }} onClick={(e) => e.stopPropagation()}>
               <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
-                <span className="font-tech text-sm font-black tracking-wide">{p.titulo} · <span className="text-cyber">DEMO</span></span>
-                <button onClick={() => setDemoOpen(false)} aria-label="Cerrar" className="p-2 rounded-lg border border-white/15 text-silver hover:text-cyber hover:border-cyber transition-colors"><X className="w-5 h-5" /></button>
+                <span className="font-tech text-sm font-black tracking-wide">{p.titulo} · <span className="text-f1-red">DEMO</span></span>
+                <button onClick={() => setDemoOpen(false)} aria-label="Cerrar" className="p-2 rounded-lg border border-white/15 text-silver hover:text-f1-red hover:border-f1-red transition-colors"><X className="w-5 h-5" /></button>
               </div>
               <video src={p.videoSrc!} controls autoPlay loop className="w-full bg-black max-h-[75vh]" />
             </motion.div>
@@ -218,10 +218,10 @@ export function ProjectCard({ p }: { p: Proyecto }) {
               initial={{ opacity: 0, scale: 0.96, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.96, y: 20 }}
               transition={{ duration: 0.25 }} onClick={(e) => e.stopPropagation()}>
               <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
-                <span className="font-tech text-sm font-black tracking-wide">{p.titulo} · <span className="text-cyber">DOCUMENTACIÓN</span></span>
+                <span className="font-tech text-sm font-black tracking-wide">{p.titulo} · <span className="text-f1-red">DOCUMENTACIÓN</span></span>
                 <div className="flex items-center gap-2">
-                  <a href={p.pdfSrc} download className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyber text-white font-tech text-xs tracking-wider hover:bg-cyber-dark transition-colors"><Download className="w-4 h-4" /> PDF</a>
-                  <button onClick={() => setPdfOpen(false)} aria-label="Cerrar" className="p-2 rounded-lg border border-white/15 text-silver hover:text-cyber hover:border-cyber transition-colors"><X className="w-5 h-5" /></button>
+                  <a href={p.pdfSrc} download className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-f1-red text-white font-tech text-xs tracking-wider hover:bg-f1-red-dark transition-colors"><Download className="w-4 h-4" /> PDF</a>
+                  <button onClick={() => setPdfOpen(false)} aria-label="Cerrar" className="p-2 rounded-lg border border-white/15 text-silver hover:text-f1-red hover:border-f1-red transition-colors"><X className="w-5 h-5" /></button>
                 </div>
               </div>
               <PdfViewer pdfUrl={p.pdfSrc!} scrollClass="max-h-[78vh]" />
