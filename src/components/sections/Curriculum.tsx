@@ -43,17 +43,17 @@ export default function Curriculum() {
         initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="h-1 bg-f1-red" />
+        <div className="h-1 bg-cyber" />
 
         {/* cabecera con acciones */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 sm:p-5 border-b border-white/10">
           <h2 className="font-tech text-xl sm:text-2xl font-black">
-            CV · <span className="text-f1-red">ALBERTO GARCÍA MARTÍN</span>
+            CV · <span className="text-cyber">ALBERTO GARCÍA MARTÍN</span>
           </h2>
           <div className="flex flex-wrap gap-2">
             <button
               onClick={() => setOpen(true)}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-white/15 text-silver hover:text-f1-red hover:border-f1-red font-tech text-xs tracking-wider transition-colors"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-white/15 text-silver hover:text-cyber hover:border-cyber font-tech text-xs tracking-wider transition-colors"
             >
               <Maximize2 className="w-4 h-4" /> Pantalla completa
             </button>
@@ -92,14 +92,14 @@ export default function Curriculum() {
             >
               <div className="flex items-center justify-between gap-3 px-4 sm:px-5 py-3 border-b border-white/10">
                 <span className="font-tech text-sm sm:text-base font-black tracking-wide">
-                  CV · <span className="text-f1-red">PANTALLA COMPLETA</span>
+                  CV · <span className="text-cyber">PANTALLA COMPLETA</span>
                 </span>
                 <div className="flex items-center gap-2">
                   <Button variant="primary" size="sm" href={PDF_URL} download="CV-Alberto-Garcia-Martin.pdf">
                     <Download className="w-4 h-4 mr-1" /> PDF
                   </Button>
                   <button onClick={() => setOpen(false)} aria-label="Cerrar"
-                    className="p-2 rounded-lg border border-white/15 text-silver hover:text-f1-red hover:border-f1-red transition-colors">
+                    className="p-2 rounded-lg border border-white/15 text-silver hover:text-cyber hover:border-cyber transition-colors">
                     <X className="w-5 h-5" />
                   </button>
                 </div>
