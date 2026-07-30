@@ -9,7 +9,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/b
 function Spinner({ label = 'Cargando documento…' }: { label?: string }) {
   return (
     <div className="flex flex-col items-center justify-center gap-3 py-16 text-silver">
-      <span className="h-8 w-8 rounded-full border-2 border-white/15 border-t-f1-red animate-spin" />
+      <span className="h-8 w-8 rounded-full border-2 border-white/15 border-t-cyber animate-spin" />
       <span className="font-tech text-xs tracking-[0.3em] uppercase">{label}</span>
     </div>
   );
@@ -48,7 +48,7 @@ export function PdfViewer({ pdfUrl, scrollClass }: { pdfUrl: string; scrollClass
   if (error) {
     return (
       <div className="flex flex-col items-center justify-center gap-4 py-16 text-center px-6">
-        <FileWarning className="w-10 h-10 text-f1-red" />
+        <FileWarning className="w-10 h-10 text-cyber" />
         <p className="text-silver text-sm max-w-md">
           {isMissing
             ? 'No encuentro el PDF. Revisa la ruta en public/ y recarga.'
@@ -58,7 +58,7 @@ export function PdfViewer({ pdfUrl, scrollClass }: { pdfUrl: string; scrollClass
           {error}
         </pre>
         <a href={pdfUrl} target="_blank" rel="noopener noreferrer"
-           className="px-4 py-2 rounded-lg border border-f1-red text-f1-red hover:bg-f1-red hover:text-white font-tech text-xs tracking-wider transition-colors">
+           className="px-4 py-2 rounded-lg border border-cyber text-cyber hover:bg-cyber hover:text-white font-tech text-xs tracking-wider transition-colors">
           ABRIR PDF
         </a>
       </div>
@@ -71,25 +71,25 @@ export function PdfViewer({ pdfUrl, scrollClass }: { pdfUrl: string; scrollClass
       <div className="flex items-center justify-between gap-2 px-3 py-2.5 bg-black/40 border-b border-white/10 font-tech text-xs tracking-wider">
         <div className="flex items-center gap-1">
           <button onClick={() => go(-1)} disabled={pageNumber <= 1}
-            className="p-1.5 rounded text-silver hover:text-f1-red disabled:opacity-30 disabled:hover:text-silver transition-colors" aria-label="Página anterior">
+            className="p-1.5 rounded text-silver hover:text-cyber disabled:opacity-30 disabled:hover:text-silver transition-colors" aria-label="Página anterior">
             <ChevronLeft className="w-4 h-4" />
           </button>
           <span className="text-white tabular-nums px-1">
             {pageNumber} <span className="text-silver/60">/ {numPages ?? '–'}</span>
           </span>
           <button onClick={() => go(1)} disabled={!numPages || pageNumber >= numPages}
-            className="p-1.5 rounded text-silver hover:text-f1-red disabled:opacity-30 disabled:hover:text-silver transition-colors" aria-label="Página siguiente">
+            className="p-1.5 rounded text-silver hover:text-cyber disabled:opacity-30 disabled:hover:text-silver transition-colors" aria-label="Página siguiente">
             <ChevronRight className="w-4 h-4" />
           </button>
         </div>
         <div className="flex items-center gap-1">
           <button onClick={() => setZoom((z) => Math.max(0.6, +(z - 0.2).toFixed(2)))}
-            className="p-1.5 rounded text-silver hover:text-f1-red transition-colors" aria-label="Alejar">
+            className="p-1.5 rounded text-silver hover:text-cyber transition-colors" aria-label="Alejar">
             <ZoomOut className="w-4 h-4" />
           </button>
           <span className="text-silver tabular-nums w-12 text-center">{Math.round(zoom * 100)}%</span>
           <button onClick={() => setZoom((z) => Math.min(2.4, +(z + 0.2).toFixed(2)))}
-            className="p-1.5 rounded text-silver hover:text-f1-red transition-colors" aria-label="Acercar">
+            className="p-1.5 rounded text-silver hover:text-cyber transition-colors" aria-label="Acercar">
             <ZoomIn className="w-4 h-4" />
           </button>
         </div>

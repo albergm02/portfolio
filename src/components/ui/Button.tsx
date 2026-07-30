@@ -3,13 +3,13 @@ import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center rounded-lg font-semibold transition-all duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-f1-red focus:ring-offset-2 focus:ring-offset-carbon',
+  'inline-flex items-center justify-center rounded-lg font-semibold transition-all duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-cyber focus:ring-offset-2 focus:ring-offset-carbon',
   {
     variants: {
       variant: {
-        primary: 'bg-f1-red text-white hover:bg-f1-red-dark shadow-lg hover:-translate-y-1',
+        primary: 'bg-cyber text-white hover:bg-cyber-dark shadow-lg hover:-translate-y-1',
         secondary: 'bg-white text-carbon hover:bg-white/90 shadow-lg hover:-translate-y-1',
-        outline: 'border-2 border-f1-red text-f1-red hover:bg-f1-red hover:text-white',
+        outline: 'border-2 border-cyber text-cyber hover:bg-cyber hover:text-white',
         ghost: 'text-white hover:bg-white/10',
       },
       size: {

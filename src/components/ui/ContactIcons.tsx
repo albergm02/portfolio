@@ -19,7 +19,7 @@ export function ContactIcons({ size = 'md' }: { size?: 'md' | 'lg' }) {
           href={href}
           aria-label={label}
           {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-          className={`flex items-center justify-center ${box} rounded-lg border border-white/15 text-silver hover:text-f1-red hover:border-f1-red transition-colors`}
+          className={`flex items-center justify-center ${box} rounded-lg border border-white/15 text-silver hover:text-cyber hover:border-cyber transition-colors`}
         >
           <Icon className={ic} />
         </a>
