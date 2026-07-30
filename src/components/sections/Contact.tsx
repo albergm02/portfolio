@@ -14,7 +14,7 @@ function SendingBars() {
       {[0, 1, 2, 3].map((i) => (
         <motion.span
           key={i}
-          className="w-0.5 bg-cyber rounded-full"
+          className="w-0.5 bg-f1-red rounded-full"
           animate={{ height: ['20%', '100%', '20%'] }}
           transition={{ duration: 0.6, repeat: Infinity, delay: i * 0.12 }}
         />
@@ -59,7 +59,7 @@ export default function Contact() {
   };
 
   const inputCls =
-    'w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-sm text-white placeholder:text-silver/50 font-tech tracking-wide focus:outline-none focus:border-cyber focus:ring-1 focus:ring-cyber transition-colors';
+    'w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-sm text-white placeholder:text-silver/50 font-tech tracking-wide focus:outline-none focus:border-f1-red focus:ring-1 focus:ring-f1-red transition-colors';
 
   return (
     /* ✅ FIX: px-5 y menos padding vertical en móvil */
@@ -75,8 +75,8 @@ export default function Contact() {
         HABLEMOS
       </motion.h2>
       <p className="text-silver mt-3 max-w-xl text-sm sm:text-base">
-          Si buscas un analista SOC con base técnica, curiosidad insaciable y ganas de
-          aprender, hablemos. Te respondo lo antes posible.
+        Tanto si tienes una oferta concreta como si quieres proponerme un proyecto o
+        simplemente saludar, escríbeme. Te respondo lo antes posible.
       </p>
 
       <div className="grid gap-6 mt-8 sm:mt-10 md:grid-cols-2">
@@ -91,10 +91,10 @@ export default function Contact() {
              bajen a dos líneas en móvil en vez de chocar */}
           <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
             <span className="flex items-center gap-2 font-tech text-xs tracking-[0.2em] sm:tracking-[0.3em] text-silver">
-              <MessageSquare className="w-4 h-4 text-cyber" /> FORMULARIO DE CONTACTO
+              <MessageSquare className="w-4 h-4 text-f1-red" /> FORMULARIO DE CONTACTO
             </span>
             {sending ? (
-              <span className="flex items-center gap-2 font-tech text-xs text-cyber">
+              <span className="flex items-center gap-2 font-tech text-xs text-f1-red">
                 <SendingBars /> ENVIANDO…
               </span>
             ) : sent ? (
@@ -178,23 +178,23 @@ export default function Contact() {
           </span>
 
           <a href={`mailto:${EMAIL}`} className="group flex items-center gap-3">
-            <span className="flex items-center justify-center w-10 h-10 shrink-0 rounded-lg bg-cyber/10 text-cyber group-hover:bg-cyber group-hover:text-white transition-colors">
+            <span className="flex items-center justify-center w-10 h-10 shrink-0 rounded-lg bg-f1-red/10 text-f1-red group-hover:bg-f1-red group-hover:text-white transition-colors">
               <Mail className="w-5 h-5" />
             </span>
             <span className="min-w-0">
               <span className="block font-tech text-[11px] tracking-wider text-silver uppercase">Email</span>
               {/* ✅ FIX: break-all en vez de truncate → el email largo se ve entero en móvil */}
-              <span className="block text-white font-semibold break-all group-hover:text-cyber transition-colors">{EMAIL}</span>
+              <span className="block text-white font-semibold break-all group-hover:text-f1-red transition-colors">{EMAIL}</span>
             </span>
           </a>
 
           <a href={`tel:${PHONE.replace(/\s/g, '')}`} className="group flex items-center gap-3">
-            <span className="flex items-center justify-center w-10 h-10 shrink-0 rounded-lg bg-cyber/10 text-cyber group-hover:bg-cyber group-hover:text-white transition-colors">
+            <span className="flex items-center justify-center w-10 h-10 shrink-0 rounded-lg bg-f1-red/10 text-f1-red group-hover:bg-f1-red group-hover:text-white transition-colors">
               <Phone className="w-5 h-5" />
             </span>
             <span className="min-w-0">
               <span className="block font-tech text-[11px] tracking-wider text-silver uppercase">Teléfono</span>
-              <span className="block text-white font-semibold group-hover:text-cyber transition-colors">{PHONE}</span>
+              <span className="block text-white font-semibold group-hover:text-f1-red transition-colors">{PHONE}</span>
             </span>
           </a>
 
@@ -210,7 +210,7 @@ export default function Contact() {
 
           <button
             onClick={copyEmail}
-            className="flex items-center gap-2 w-full justify-center px-4 py-3 rounded-lg border border-white/15 text-silver hover:text-cyber hover:border-cyber font-tech text-xs tracking-wider uppercase transition-colors"
+            className="flex items-center gap-2 w-full justify-center px-4 py-3 rounded-lg border border-white/15 text-silver hover:text-f1-red hover:border-f1-red font-tech text-xs tracking-wider uppercase transition-colors"
           >
             {copied ? (<><Check className="w-4 h-4" /> Email copiado</>) : (<><Copy className="w-4 h-4" /> Copiar email</>)}
           </button>

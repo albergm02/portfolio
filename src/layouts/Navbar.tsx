@@ -27,22 +27,22 @@ export default function Navbar() {
       <div className="flex items-center gap-3">
         <div className="leading-tight">
           <span className="block font-tech font-bold text-base sm:text-lg tracking-wide">Alberto García Martín</span>
-          <span className="block text-[10px] tracking-[0.25em] text-cyber uppercase">Aspirante a Analista SOC</span>
+          <span className="block text-[10px] tracking-[0.25em] text-f1-red uppercase">Ingeniero informático</span>
         </div>
       </div>
 
       {/* Redes (ocultas en móvil: ya están en el Hero y en About) */}
       <div className="hidden sm:flex items-center gap-4">
         <a href="https://github.com/albergm02" target="_blank" rel="noopener noreferrer"
-           className="text-silver hover:text-cyber transition-colors" aria-label="GitHub">
+           className="text-silver hover:text-f1-red transition-colors" aria-label="GitHub">
           <GithubIcon className="w-5 h-5" />
         </a>
         <a href="https://www.linkedin.com/in/albertogarciamartin/" target="_blank" rel="noopener noreferrer"
-           className="text-silver hover:text-cyber transition-colors" aria-label="LinkedIn">
+           className="text-silver hover:text-f1-red transition-colors" aria-label="LinkedIn">
           <LinkedinIcon className="w-5 h-5" />
         </a>
         <a href="mailto:alberto.g.m.0214@gmail.com"
-           className="text-silver hover:text-cyber transition-colors" aria-label="Email">
+           className="text-silver hover:text-f1-red transition-colors" aria-label="Email">
           <Mail className="w-5 h-5" />
         </a>
       </div>
