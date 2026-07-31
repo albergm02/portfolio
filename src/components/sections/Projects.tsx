@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+import { Shield, GraduationCap, Lock } from 'lucide-react';
 import { SectionLabel } from '../ui/SectionLabel';
 import { ScrollCue } from '../ui/ScrollCue';
 import { ProjectCard, type Proyecto } from '../ui/ProjectCard';
@@ -31,10 +33,10 @@ const PROYECTOS: Proyecto[] = [
       'Videojuego de género tower defense desarrollado con Unity y C#. Incluye trabajo de gráficos y shaders (ShaderLab y HLSL).',
     tags: ['Unity', 'C#', 'ShaderLab', 'HLSL', 'Tower Defense', 'GameDev'],
     repo: 'https://github.com/albergm02/cat_defense',
-    videoSrc: 'catdefense.mp4', // 👈 COPIA CatDeffense_Video.mp4 del repo a public/ con este nombre
-    posterSrc: 'catdefense.png', // 👈 opcional: saca una captura del juego (16:9) a public/ para el thumbnail
-    descarga: '/informe-catdefense.pdf', // 👈 opcional: copia Informe _CatDeffense.pdf a public/ y aparece un botón "Descargar"
-    ancho: true,        // tarjeta panorámica de fila completa (luce el vídeo grande sin robarle el anillo a F1)
+    videoSrc: 'catdefense.mp4', 
+    posterSrc: 'catdefense.png', 
+    descarga: '/informe-catdefense.pdf', 
+    ancho: true,       
   },
   {
   id: 'security-systems',
@@ -42,7 +44,7 @@ const PROYECTOS: Proyecto[] = [
   subtitulo: 'Proyecto de ciberseguridad',
   anio: '2025', 
   descripcion:
-    'Proyecto centrado en la seguridad de sistemas y redes.',
+    'Proyecto centrado en la seguridad de sistemas y encriptación de archivos.',
   tags: ['Ciberseguridad'],
   repo: 'https://github.com/albergm02/Security-Systems',
   posterSrc: 'sec.png',   
@@ -85,28 +87,93 @@ const PROYECTOS: Proyecto[] = [
   },
 ];
 
-export default function Projects() {
+/* ===== Cabecera de categoría (compacta) ===== */
+function CategoriaHeader({ icon: Icon, titulo, sub, count }: { icon: typeof Shield; titulo: string; sub: string; count: number }) {
   return (
-    <div className="mx-auto max-w-5xl px-5 sm:px-6 py-16 sm:py-20 md:py-28">
-      <SectionLabel index="04" label="Proyectos" />
-
-      <h2 className="font-tech text-3xl md:text-5xl font-black mt-6 leading-tight text-balance">
-        PROYECTOS <span className="text-f1-red">DESTACADOS</span>
-      </h2>
-      <p className="text-silver mt-3 max-w-2xl text-sm sm:text-base">
-        Una selección de lo que he construido: desde concurrencia y sistemas a bajo nivel hasta
-        aplicaciones web full-stack. Pulsa <span className="text-f1-red">Ver demo</span> para
-        verlo en acción o <span className="text-f1-red">Ver código</span> para entrar al repositorio.
-      </p>
-
-      <div className="grid gap-6 mt-10 md:grid-cols-2">
-        {PROYECTOS.map((p) => (
-          <ProjectCard key={p.id} p={p} />
-        ))}
+    <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-2.5">
+      <div className="flex items-center gap-3 min-w-0">
+        <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-f1-red/10 text-f1-red shrink-0">
+          <Icon className="w-[18px] h-[18px]" />
+        </span>
+        <div className="min-w-0">
+          <h3 className="font-tech text-lg sm:text-xl font-black text-white leading-tight truncate">{titulo}</h3>
+          <p className="text-silver text-[11px] sm:text-xs truncate">{sub}</p>
+        </div>
       </div>
+      <span className="shrink-0 font-mono text-[10px] tracking-[0.15em] uppercase text-silver border border-white/15 rounded-full px-2.5 py-1">
+        {count > 0 ? `${count}` : 'WIP'}
+      </span>
+    </div>
+  );
+}
 
-      <div className="flex justify-center mt-8">
-        <ScrollCue href="#experiencia" label="Trayectoria" />
+/* ===== Placeholder de seguridad con forma de tarjeta (misma caja que el resto) ===== */
+function SeguridadPlaceholder({ wide = false }: { wide?: boolean }) {
+  const areas = ['Seguridad ofensiva', 'Criptografía', 'Hardening'];
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
+      className={`flex flex-col rounded-xl border border-dashed border-white/15 bg-carbon-light/40 p-5 ${wide ? 'sm:col-span-2' : ''}`}
+    >
+      <div className="flex items-center gap-3">
+        <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-f1-red/10 text-f1-red shrink-0"><Lock className="w-[18px] h-[18px]" /></span>
+        <h4 className="font-tech text-base sm:text-lg font-black text-white">Arsenal en construcción</h4>
+      </div>
+      <p className="text-silver text-sm leading-relaxed mt-3 flex-1">
+        Formándome activamente en ciberseguridad. Aquí irán mis <span className="text-white">writeups de CTFs</span>,{' '}
+        <span className="text-white">herramientas propias</span> y <span className="text-white">criptografía aplicada</span>.
+      </p>
+      <div className="flex flex-wrap gap-1.5 mt-3">
+        {areas.map((a) => (<span key={a} className="px-2 py-0.5 text-[10px] font-mono tracking-wide border border-white/10 rounded text-white/75">{a}</span>))}
+      </div>
+      <p className="font-mono text-[11px] text-f1-red/80 mt-4">
+        <span className="text-silver/60">alberto@sec:~$</span> cargando módulos
+        <motion.span animate={{ opacity: [1, 0] }} transition={{ duration: 0.7, repeat: Infinity, repeatType: 'reverse' }} className="ml-0.5">▋</motion.span>
+      </p>
+    </motion.div>
+  );
+}
+
+export default function Projects() {
+  const seguridad = PROYECTOS.filter((p) => p.categoria === 'seguridad');
+  const carrera = PROYECTOS.filter((p) => p.categoria === 'carrera');
+
+  return (
+    <div className="relative mx-auto max-w-6xl px-5 sm:px-6 py-14 sm:py-16 md:py-20">
+      {/* glow ambiental sutil del acento (cambia solo si cambias el acento en global.css) */}
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-80 bg-[radial-gradient(60%_100%_at_50%_0%,rgba(16,185,129,0.08),transparent_70%)]" />
+
+      <div className="relative z-10">
+        <SectionLabel index="04" label="Proyectos" />
+        <h2 className="font-tech text-3xl md:text-5xl font-black mt-5 leading-[1.05] tracking-tight text-balance">
+          PROYECTOS <span className="text-f1-red">DESTACADOS</span>
+        </h2>
+        <p className="text-silver mt-3 max-w-2xl text-sm sm:text-base">
+          Primero mi trabajo en <span className="text-f1-red">ciberseguridad</span> —mi foco— y después mis{' '}
+          <span className="text-f1-red">proyectos de ingeniería</span>, que acreditan una base sólida construyendo software y sistemas.
+        </p>
+
+        {/* 🛡️ SEGURIDAD */}
+        <section id="proyectos-seguridad" className="mt-10 scroll-mt-24">
+          <CategoriaHeader icon={Shield} titulo="Ciberseguridad" sub="Seguridad ofensiva, defensiva y criptografía" count={seguridad.length} />
+          <div className="grid gap-4 sm:gap-5 mt-5 sm:grid-cols-2">
+            {seguridad.map((p) => (<ProjectCard key={p.id} p={p} />))}
+            {seguridad.length === 0 && <SeguridadPlaceholder wide />}
+            {seguridad.length === 1 && <SeguridadPlaceholder />}
+          </div>
+        </section>
+
+        {/* 🎓 CARRERA */}
+        <section id="proyectos-carrera" className="mt-12 scroll-mt-24">
+          <CategoriaHeader icon={GraduationCap} titulo="Proyectos de la carrera" sub="Ingeniería de software, sistemas y desarrollo" count={carrera.length} />
+          <div className="grid gap-4 sm:gap-5 mt-5 sm:grid-cols-2">
+            {carrera.map((p) => (<ProjectCard key={p.id} p={p} />))}
+          </div>
+        </section>
+
+        <div className="flex justify-center mt-10">
+          <ScrollCue href="#experiencia" label="Trayectoria" />
+        </div>
       </div>
     </div>
   );
