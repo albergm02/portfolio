@@ -23,6 +23,20 @@ const PROYECTOS: Proyecto[] = [
     destacado: true,      
   },
   {
+    id: 'cat-defense',
+    titulo: 'Cat Defense',
+    subtitulo: 'Videojuego · Tower Defense',
+    anio: '2026', // leído del commit "added project from 2026"
+    descripcion:
+      'Videojuego de género tower defense desarrollado con Unity y C#. Incluye trabajo de gráficos y shaders (ShaderLab y HLSL).',
+    tags: ['Unity', 'C#', 'ShaderLab', 'HLSL', 'Tower Defense', 'GameDev'],
+    repo: 'https://github.com/albergm02/cat_defense',
+    videoSrc: 'catdefense.mp4', // 👈 COPIA CatDeffense_Video.mp4 del repo a public/ con este nombre
+    posterSrc: 'catdefense.png', // 👈 opcional: saca una captura del juego (16:9) a public/ para el thumbnail
+    descarga: '/informe-catdefense.pdf', // 👈 opcional: copia Informe _CatDeffense.pdf a public/ y aparece un botón "Descargar"
+    ancho: true,        // tarjeta panorámica de fila completa (luce el vídeo grande sin robarle el anillo a F1)
+  },
+  {
   id: 'security-systems',
   titulo: 'Security Systems',
   subtitulo: 'Proyecto de ciberseguridad',
