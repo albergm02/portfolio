@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Shield, GraduationCap, Lock } from 'lucide-react';
+import { Play, Globe, FileText } from 'lucide-react';
 import { SectionLabel } from '../ui/SectionLabel';
 import { ScrollCue } from '../ui/ScrollCue';
 import { ProjectCard, type Proyecto } from '../ui/ProjectCard';
@@ -87,89 +87,95 @@ const PROYECTOS: Proyecto[] = [
   },
 ];
 
-/* ===== Cabecera de categoría (compacta) ===== */
-function CategoriaHeader({ icon: Icon, titulo, sub, count }: { icon: typeof Shield; titulo: string; sub: string; count: number }) {
-  return (
-    <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-2.5">
-      <div className="flex items-center gap-3 min-w-0">
-        <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-f1-red/10 text-f1-red shrink-0">
-          <Icon className="w-[18px] h-[18px]" />
-        </span>
-        <div className="min-w-0">
-          <h3 className="font-tech text-lg sm:text-xl font-black text-white leading-tight truncate">{titulo}</h3>
-          <p className="text-silver text-[11px] sm:text-xs truncate">{sub}</p>
-        </div>
-      </div>
-      <span className="shrink-0 font-mono text-[10px] tracking-[0.15em] uppercase text-silver border border-white/15 rounded-full px-2.5 py-1">
-        {count > 0 ? `${count}` : 'WIP'}
-      </span>
-    </div>
-  );
-}
-
-/* ===== Placeholder de seguridad con forma de tarjeta (misma caja que el resto) ===== */
-function SeguridadPlaceholder({ wide = false }: { wide?: boolean }) {
-  const areas = ['Seguridad ofensiva', 'Criptografía', 'Hardening'];
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
-      className={`flex flex-col rounded-xl border border-dashed border-white/15 bg-carbon-light/40 p-5 ${wide ? 'sm:col-span-2' : ''}`}
-    >
-      <div className="flex items-center gap-3">
-        <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-f1-red/10 text-f1-red shrink-0"><Lock className="w-[18px] h-[18px]" /></span>
-        <h4 className="font-tech text-base sm:text-lg font-black text-white">Arsenal en construcción</h4>
-      </div>
-      <p className="text-silver text-sm leading-relaxed mt-3 flex-1">
-        Formándome activamente en ciberseguridad. Aquí irán mis <span className="text-white">writeups de CTFs</span>,{' '}
-        <span className="text-white">herramientas propias</span> y <span className="text-white">criptografía aplicada</span>.
-      </p>
-      <div className="flex flex-wrap gap-1.5 mt-3">
-        {areas.map((a) => (<span key={a} className="px-2 py-0.5 text-[10px] font-mono tracking-wide border border-white/10 rounded text-white/75">{a}</span>))}
-      </div>
-      <p className="font-mono text-[11px] text-f1-red/80 mt-4">
-        <span className="text-silver/60">alberto@sec:~$</span> cargando módulos
-        <motion.span animate={{ opacity: [1, 0] }} transition={{ duration: 0.7, repeat: Infinity, repeatType: 'reverse' }} className="ml-0.5">▋</motion.span>
-      </p>
-    </motion.div>
-  );
-}
 
 export default function Projects() {
-  const seguridad = PROYECTOS.filter((p) => p.categoria === 'seguridad');
-  const carrera = PROYECTOS.filter((p) => p.categoria === 'carrera');
+  // Conteo vivo para el panel de estado (información real, no decoración)
+  const total = PROYECTOS.length;
+  const conVideo = PROYECTOS.filter((p) => p.videoSrc).length;
+  const conApp = PROYECTOS.filter((p) => p.demoEnVivo).length;
+  const conDoc = PROYECTOS.filter((p) => p.pdfSrc).length;
+  const watermark = String(total).padStart(2, '0');
+
+  const leyenda = [
+    { n: conVideo, icon: Play, label: 'con vídeo' },
+    { n: conApp, icon: Globe, label: 'app en vivo' },
+    { n: conDoc, icon: FileText, label: 'con documento' },
+  ].filter((x) => x.n > 0);
 
   return (
-    <div className="relative mx-auto max-w-6xl px-5 sm:px-6 py-14 sm:py-16 md:py-20">
-      {/* glow ambiental sutil del acento (cambia solo si cambias el acento en global.css) */}
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-80 bg-[radial-gradient(60%_100%_at_50%_0%,rgba(16,185,129,0.08),transparent_70%)]" />
+    <div className="relative mx-auto max-w-6xl px-5 sm:px-6 py-14 sm:py-16 md:py-20 overflow-hidden">
+      {/* ===== FONDO AMBIENTAL (vivo, sutil, con intención) ===== */}
+      {/* grid de líneas tenue, desvanecido hacia los bordes */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            'linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px)',
+          backgroundSize: '44px 44px',
+          maskImage: 'radial-gradient(85% 60% at 50% 0%, #000 25%, transparent 100%)',
+          WebkitMaskImage: 'radial-gradient(85% 60% at 50% 0%, #000 25%, transparent 100%)',
+        }}
+      />
+      {/* glow desplazado del acento */}
+      <div aria-hidden className="pointer-events-none absolute -top-24 -right-24 w-[34rem] h-[24rem] bg-f1-red/10 blur-[100px] rounded-full" />
+      {/* línea de escaneo lenta */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-f1-red/30 to-transparent"
+        initial={{ top: '0%' }}
+        animate={{ top: '100%' }}
+        transition={{ duration: 7, repeat: Infinity, ease: 'linear', repeatDelay: 2 }}
+      />
 
       <div className="relative z-10">
         <SectionLabel index="04" label="Proyectos" />
-        <h2 className="font-tech text-3xl md:text-5xl font-black mt-5 leading-[1.05] tracking-tight text-balance">
-          PROYECTOS <span className="text-f1-red">DESTACADOS</span>
-        </h2>
-        <p className="text-silver mt-3 max-w-2xl text-sm sm:text-base">
-          Primero mi trabajo en <span className="text-f1-red">ciberseguridad</span> —mi foco— y después mis{' '}
-          <span className="text-f1-red">proyectos de ingeniería</span>, que acreditan una base sólida construyendo software y sistemas.
-        </p>
 
-        {/* 🛡️ SEGURIDAD */}
-        <section id="proyectos-seguridad" className="mt-10 scroll-mt-24">
-          <CategoriaHeader icon={Shield} titulo="Ciberseguridad" sub="Seguridad ofensiva, defensiva y criptografía" count={seguridad.length} />
-          <div className="grid gap-4 sm:gap-5 mt-5 sm:grid-cols-2">
-            {seguridad.map((p) => (<ProjectCard key={p.id} p={p} />))}
-            {seguridad.length === 0 && <SeguridadPlaceholder wide />}
-            {seguridad.length === 1 && <SeguridadPlaceholder />}
-          </div>
-        </section>
+        {/* ===== ENCABEZADO con carácter ===== */}
+        <div className="relative mt-5 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+          {/* marca de agua con el total (información real, no adorno) */}
+          <span
+            aria-hidden
+            className="pointer-events-none select-none absolute -top-10 right-0 md:-right-2 font-tech font-black leading-none text-white/[0.04] text-[7rem] sm:text-[9rem]"
+          >
+            {watermark}
+          </span>
 
-        {/* 🎓 CARRERA */}
-        <section id="proyectos-carrera" className="mt-12 scroll-mt-24">
-          <CategoriaHeader icon={GraduationCap} titulo="Proyectos de la carrera" sub="Ingeniería de software, sistemas y desarrollo" count={carrera.length} />
-          <div className="grid gap-4 sm:gap-5 mt-5 sm:grid-cols-2">
-            {carrera.map((p) => (<ProjectCard key={p.id} p={p} />))}
+          <div className="relative min-w-0">
+            <h2 className="font-tech text-3xl md:text-5xl font-black leading-[1.05] tracking-tight text-balance">
+              PROYECTOS <span className="text-f1-red">DESTACADOS</span>
+            </h2>
+            <p className="text-silver mt-3 max-w-xl text-sm sm:text-base">
+              Una selección versátil de lo que construyo: aplicaciones web full-stack, sistemas a bajo
+              nivel, desarrollo de videojuegos, administración de servidores y ciberseguridad. Cada uno con
+              su demo, su código o su documentación.
+            </p>
           </div>
-        </section>
+
+          {/* panel de estado vivo */}
+          <div className="relative shrink-0 rounded-xl border border-white/10 bg-carbon-light/50 backdrop-blur-sm px-4 py-3">
+            <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-silver/70">Estado del portfolio</p>
+            <div className="flex items-baseline gap-2 mt-1">
+              <span className="font-tech text-3xl font-black text-white tabular-nums">{watermark}</span>
+              <span className="font-mono text-[11px] text-silver">proyectos</span>
+            </div>
+            <div className="flex flex-wrap gap-x-3 gap-y-1 mt-2">
+              {leyenda.map(({ n, icon: Icon, label }) => (
+                <span key={label} className="flex items-center gap-1.5 font-mono text-[11px] text-white/70">
+                  <Icon className="w-3 h-3 text-f1-red" />
+                  <span className="tabular-nums text-white">{n}</span> {label}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ===== UNA SOLA PARRILLA UNIFORME ===== */}
+        <div className="grid gap-4 sm:gap-5 mt-10 sm:grid-cols-2">
+          {PROYECTOS.map((p) => (
+            <ProjectCard key={p.id} p={p} />
+          ))}
+        </div>
 
         <div className="flex justify-center mt-10">
           <ScrollCue href="#experiencia" label="Trayectoria" />
