@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* ===================== TEMAS (variables que cambian con .dark) ===================== */
+:root {
+  --bg: #e6e9ef;            /* superficie base (neumorphism.io classic) */
+  --surface: #e6e9ef;
+  --shadow-dark: #c2c6d0;
+  --shadow-light: #ffffff;
+  --ink: #2b2f38;           /* texto principal */
+  --ink-soft: #6b7280;      /* texto secundario */
+  --accent: #4f63d8;        /* acento sobrio (índigo pizarra) */
+  --accent-ink: #ffffff;
+  --line: rgba(20, 24, 40, 0.08);
+  --nav-bg: rgba(230, 233, 239, 0.72);
+}
+.dark {
+  --bg: #23262e;
+  --surface: #23262e;
+  --shadow-dark: #181a20;
+  --shadow-light: #2e323c;
+  --ink: #e7e9ee;
+  --ink-soft: #9aa1ad;
+  --accent: #8294ff;
+  --accent-ink: #0e1016;
+  --line: rgba(255, 255, 255, 0.08);
+  --nav-bg: rgba(35, 38, 46, 0.72);
+}
+
+/* utilidades de color ligadas al tema (así no peleas con Tailwind) */
+.t-ink   { color: var(--ink); }
+.t-soft  { color: var(--ink-soft); }
+.t-accent{ color: var(--accent); }
+.bg-surface { background: var(--surface); }
+.border-line{ border-color: var(--line); }
+.nav-bg  { background: var(--nav-bg); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--ink);
+  background-color: var(--bg);
+  /* glow muy tenue del acento para que no sea totalmente plano (sutil, serio) */
+  background-image: radial-gradient(900px 520px at 88% -8%, color-mix(in srgb, var(--accent) 7%, transparent), transparent 62%);
+  background-attachment: fixed;
+  transition: background-color .35s ease, color .35s ease;
+}
+
+/* ===================== NEUMORFISMO SERIO (sombras sutiles, no plastilina) ===================== */
+.neu-card   { background: var(--surface); box-shadow: 7px 7px 16px var(--shadow-dark), -7px -7px 16px var(--shadow-light); transition: box-shadow .35s ease, background-color .35s ease; }
+.neu-raised { background: var(--surface); box-shadow: 5px 5px 11px var(--shadow-dark), -5px -5px 11px var(--shadow-light); transition: box-shadow .35s ease, background-color .35s ease; }
+.neu-inset  { background: var(--surface); box-shadow: inset 4px 4px 9px var(--shadow-dark), inset -4px -4px 9px var(--shadow-light); transition: box-shadow .35s ease, background-color .35s ease; }
+
+.neu-btn {
+  background: var(--surface); color: var(--ink);
+  box-shadow: 5px 5px 12px var(--shadow-dark), -5px -5px 12px var(--shadow-light);
+  transition: box-shadow .15s ease, transform .15s ease, color .2s ease, background-color .35s ease;
+}
+.neu-btn:hover  { box-shadow: 6px 6px 14px var(--shadow-dark), -6px -6px 14px var(--shadow-light); color: var(--accent); }
+.neu-btn:active { box-shadow: inset 4px 4px 9px var(--shadow-dark), inset -4px -4px 9px var(--shadow-light); transform: translateY(1px); }
+
+.neu-accent {
+  background: var(--accent); color: var(--accent-ink);
+  box-shadow: 4px 4px 11px var(--shadow-dark), -4px -4px 11px var(--shadow-light);
+  transition: box-shadow .15s ease, transform .15s ease, filter .2s ease;
+}
+.neu-accent:hover  { filter: brightness(1.06); }
+.neu-accent:active { transform: translateY(1px); box-shadow: inset 3px 3px 8px rgba(0,0,0,.28), inset -3px -3px 8px rgba(255,255,255,.12); }
+
+/* estado "activo/encendido" del switch de tema */
+.neu-on { box-shadow: inset 4px 4px 9px var(--shadow-dark), inset -4px -4px 9px var(--shadow-light); color: var(--accent); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  html { scroll-behavior: auto; }
+}

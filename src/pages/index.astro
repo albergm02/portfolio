@@ -1,38 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Hero from '../components/sections/Hero';
-import About from '../components/sections/About';
-import Curriculum from '../components/sections/Curriculum';
-import Projects from '../components/sections/Projects';
-import Experience from '../components/sections/Experience';
-import Contact from '../components/sections/Contact';
+import App from '../components/app/App';
 ---
 
-<Layout title="Alberto García Martín | Ingeniero informático">
-  <Hero client:load />
-
-  <!-- 02 · PERFIL PERSONAL -->
-  <section id="sobre-mi" class="bg-carbon-light">
-    <About client:load />
-  </section>
-
-  <!-- 03 · CURRÍCULUM (pegado al perfil: forman el dosier de identidad) -->
-  <section id="cv" class="bg-carbon">
-    <Curriculum client:only="react" />
-  </section>
-
-  <!-- 04 · PROYECTOS -->
-  <section id="proyectos" class="bg-carbon-light">
-    <Projects client:only="react" />
-  </section>
-
-  <!-- 05 · TRAYECTORIA -->
-  <section id="experiencia" class="bg-carbon">
-    <Experience client:load />
-  </section>
-
-  <!-- 06 · CONTACTO -->
-  <section id="contacto" class="bg-carbon-light">
-    <Contact client:load />
-  </section>
+<Layout>
+  <App client:load />
 </Layout>
