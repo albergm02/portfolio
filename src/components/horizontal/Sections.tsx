@@ -197,7 +197,7 @@ export function Projects({ onVideo }: { onVideo: (src: string, title: string) =>
         <motion.div variants={drop} custom={PROYECTOS.length + 2} className="neu-inset rounded-[1.75rem] p-5 flex flex-col justify-center gap-3 border-2 border-dashed border-sand-dark/50">
           <span className="neu-raised w-12 h-12 rounded-2xl flex items-center justify-center text-coral"><Cpu className="w-6 h-6" /></span>
           <h3 className="font-display font-extrabold text-lg text-ink">En el horno</h3>
-          <p className="text-ink-soft text-sm">Próximamente proyectos de <span className="text-coral font-bold">IoT</span> y <span className="text-coral font-bold">realidad virtual</span>.</p>
+          <p className="text-ink-soft text-sm">Próximamente proyectos de <span className="text-coral font-bold">Desarrollo Web</span>: cubik-arena </p>
         </motion.div>
       </div>
     </div>

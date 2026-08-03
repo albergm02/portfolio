@@ -183,7 +183,7 @@ export function Contact() {
   return (
     <motion.div variants={rise} custom={0} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-60px' }} className="neu-card rounded-2xl p-7 sm:p-10 max-w-xl w-full text-center space-y-6">
       <div><Eyebrow>Contacto</Eyebrow><h2 className="font-extrabold text-2xl sm:text-3xl t-ink mt-3 tracking-tight">Hablemos</h2>
-        <p className="t-soft mt-2 text-sm sm:text-base">¿Un proyecto web, un juego o algo con sensores? Escríbeme.</p></div>
+        <p className="t-soft mt-2 text-sm sm:text-base">¿Quieres colaborar en un proyecto? Escríbeme.</p></div>
       <div className="flex justify-center gap-4">
         {links.map(({ icon: Icon, label, href }) => (
           <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="neu-btn w-14 h-14 rounded-xl flex items-center justify-center"><Icon className="w-5 h-5" /></a>
