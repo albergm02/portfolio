@@ -167,7 +167,7 @@ export function Projects({ onVideo }: { onVideo: (src: string, title: string) =>
         <motion.div variants={rise} custom={PROYECTOS.length + 1} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-60px' }} className="neu-inset rounded-2xl p-5 flex flex-col justify-center gap-3 border border-dashed border-line">
           <span className="neu-raised w-11 h-11 rounded-xl flex items-center justify-center t-accent"><Cpu className="w-5 h-5" /></span>
           <h3 className="font-bold text-base t-ink">En el horno</h3>
-          <p className="t-soft text-sm">Próximamente proyectos de <span className="t-accent font-semibold">IoT</span> y <span className="t-accent font-semibold">realidad virtual</span>.</p>
+          <p className="t-soft text-sm">Próximamente más proyectos <span className="t-accent font-semibold"></span> </p>
         </motion.div>
       </div>
     </div>
