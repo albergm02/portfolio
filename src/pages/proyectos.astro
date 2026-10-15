@@ -43,38 +43,5 @@ const allProjects = (await getCollection('projects'))
 
     </div>
   </main>
-  <script>
-    import { animate, onScroll, stagger } from 'animejs';
-
-    function initProjectAnimations() {
-      // Estado inicial: las tarjetas están ocultas y desplazadas abajo
-      const cards = document.querySelectorAll('.project-card');
-      cards.forEach((card) => {
-        (card as HTMLElement).style.opacity = '0';
-        (card as HTMLElement).style.transform = 'translateY(60px)';
-      });
-
-      // Animamos cuando el contenedor de tarjetas entra en el viewport
-      animate('.project-card', {
-        opacity: [0, 1],
-        translateY: [60, 0],
-        duration: 900,
-        ease: 'outExpo',
-        delay: stagger(120),
-        // onScroll: se dispara al hacer scroll
-        autoplay: onScroll({
-          target: '.project-card',
-          enter: 'bottom-=100 top',
-          // leave: 'top bottom',
-          sync: true, // sincroniza la animación con el scroll
-        }),
-      });
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initProjectAnimations);
-    } else {
-      initProjectAnimations();
-    }
-  </script>
+  
 </BaseLayout>

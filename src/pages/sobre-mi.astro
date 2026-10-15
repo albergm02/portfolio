@@ -1,0 +1,197 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import AboutSection from '../components/AboutSection.astro';
+import { site } from '../data/site';
+import { experience } from '../data/experience';
+import { education } from '../data/education';
+import { skills, certifications } from '../data/skills';
+---
+
+<BaseLayout
+  title="Sobre mí — Alberto GM"
+  description="Conoce más sobre Alberto García Martín: ingeniero informático, formación académica y experiencia profesional."
+>
+  <Header />
+
+  <main class="relative min-h-screen overflow-hidden">
+
+    <!-- ─── Sección 1: Bio (reutilizando AboutSection) ─── -->
+    <!-- Sin CTA (ya estamos dentro) y sin preview de skills (van al final) -->
+    <div class="pt-32 lg:pt-40">
+      <AboutSection variant="full" />
+    </div>
+
+    <!-- ─── Sección 2: Experiencia ─── -->
+    <section class="relative px-6 lg:px-12 py-24 lg:py-32 overflow-hidden">
+      <div class="relative z-10 max-w-[1200px] mx-auto">
+
+        <header class="flex items-end justify-between mb-12 border-b border-border-subtle pb-6">
+          <div>
+            <div class="flex items-center gap-4 mb-4">
+              <span class="h-px w-12 bg-brand-orange" aria-hidden="true"></span>
+              <span class="text-xs font-mono uppercase tracking-[0.3em] text-brand-orange font-semibold">
+                Trayectoria
+              </span>
+            </div>
+            <h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight">
+              Experiencia<span class="text-brand-orange">.</span>
+            </h2>
+          </div>
+        </header>
+
+        <div class="space-y-12">
+          {experience.map((exp) => (
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
+              <div class="md:col-span-3">
+                <p class="text-sm font-mono text-brand-orange">{exp.period}</p>
+                <p class="text-xs font-mono text-text-muted mt-1">{exp.type}</p>
+              </div>
+
+              <div class="md:col-span-9 border-l border-border-subtle pl-6 md:pl-8">
+                <h3 class="font-display text-2xl font-bold tracking-tight">{exp.role}</h3>
+                <p class="text-brand-teal font-medium mt-1">
+                  {exp.company} <span class="text-text-muted font-normal">· {exp.department}</span>
+                </p>
+                <p class="text-text-muted leading-relaxed mt-4">{exp.summary}</p>
+
+                <ul class="mt-6 space-y-2">
+                  {exp.highlights.map((h) => (
+                    <li class="flex gap-3 text-sm text-text-muted">
+                      <span class="text-brand-orange shrink-0 mt-1" aria-hidden="true">▹</span>
+                      <span>{h}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div class="mt-6 flex flex-wrap gap-1.5">
+                  {exp.stack.map((tech) => (
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-text-muted bg-bg-elevated border border-border-subtle px-2 py-1">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── Sección 3: Formación ─── -->
+    <section class="relative px-6 lg:px-12 py-24 lg:py-32 overflow-hidden">
+      <div class="relative z-10 max-w-[1200px] mx-auto">
+
+        <header class="flex items-end justify-between mb-12 border-b border-border-subtle pb-6">
+          <div>
+            <div class="flex items-center gap-4 mb-4">
+              <span class="h-px w-12 bg-brand-orange" aria-hidden="true"></span>
+              <span class="text-xs font-mono uppercase tracking-[0.3em] text-brand-orange font-semibold">
+                Académico
+              </span>
+            </div>
+            <h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight">
+              Formación<span class="text-brand-orange">.</span>
+            </h2>
+          </div>
+        </header>
+
+        <div class="space-y-12">
+          {education.map((edu) => (
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
+              <div class="md:col-span-3">
+                <p class="text-sm font-mono text-brand-orange">{edu.period}</p>
+                <p class="text-xs font-mono text-text-muted mt-1">{edu.credits}</p>
+              </div>
+
+              <div class="md:col-span-9 border-l border-border-subtle pl-6 md:pl-8">
+                <h3 class="font-display text-2xl font-bold tracking-tight">{edu.degree}</h3>
+                <p class="text-brand-teal font-medium mt-1">{edu.institution}</p>
+                <p class="text-text-muted leading-relaxed mt-4">{edu.summary}</p>
+
+                <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-px bg-border-subtle border border-border-subtle">
+                  {edu.highlights.map((h) => (
+                    <div class="bg-bg-surface p-4">
+                      <p class="text-[10px] font-mono uppercase tracking-wider text-text-muted mb-1">{h.label}</p>
+                      <p class="font-display font-semibold text-sm">{h.value}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── Sección 4: Skills ─── -->
+    <section class="relative px-6 lg:px-12 py-24 lg:py-32 overflow-hidden">
+      <div class="relative z-10 max-w-[1200px] mx-auto">
+
+        <header class="flex items-end justify-between mb-12 border-b border-border-subtle pb-6">
+          <div>
+            <div class="flex items-center gap-4 mb-4">
+              <span class="h-px w-12 bg-brand-orange" aria-hidden="true"></span>
+              <span class="text-xs font-mono uppercase tracking-[0.3em] text-brand-orange font-semibold">
+                Herramientas
+              </span>
+            </div>
+            <h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight">
+              Skills<span class="text-brand-orange">.</span>
+            </h2>
+          </div>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-border-subtle border border-border-subtle">
+          {skills.map((group) => (
+            <div class="bg-bg-surface p-6 lg:p-8">
+              <h3 class="text-xs font-mono uppercase tracking-[0.2em] text-brand-orange mb-4">
+                {group.category}
+              </h3>
+              <div class="flex flex-wrap gap-1.5">
+                {group.items.map((item) => (
+                  <span class="text-xs font-mono text-text-muted bg-bg-elevated border border-border-subtle px-2.5 py-1 hover:border-brand-teal hover:text-brand-teal transition-colors">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── Sección 5: Certificaciones ─── -->
+    <section class="relative px-6 lg:px-12 py-24 lg:py-32 overflow-hidden">
+      <div class="relative z-10 max-w-[1200px] mx-auto">
+
+        <header class="mb-12 border-b border-border-subtle pb-6">
+          <div class="flex items-center gap-4 mb-4">
+            <span class="h-px w-12 bg-brand-orange" aria-hidden="true"></span>
+            <span class="text-xs font-mono uppercase tracking-[0.3em] text-brand-orange font-semibold">
+              Cursos y certificados
+            </span>
+          </div>
+          <h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight">
+            Certificaciones<span class="text-brand-orange">.</span>
+          </h2>
+        </header>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border-subtle border border-border-subtle">
+          {certifications.map((cert) => (
+            <div class="bg-bg-surface p-5">
+              <p class="font-display font-semibold text-sm mb-1">{cert.name}</p>
+              <p class="text-xs text-text-muted">{cert.issuer}</p>
+              <p class="text-xs font-mono text-brand-orange mt-3">{cert.year}</p>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+</BaseLayout>

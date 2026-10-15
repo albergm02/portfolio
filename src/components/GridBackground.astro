@@ -1,0 +1,42 @@
+---
+interface Props {
+  // Tamaño de la celda en px
+  cellSize?: number;
+  // Intensidad del color de la cuadrícula
+  opacity?: number;
+  // Posición del foco del fade radial
+  focusX?: string; // ej. '50%'
+  focusY?: string; // ej. '40%'
+}
+
+const { cellSize = 64, opacity = 0.07, focusX = '50%', focusY = '40%' } = Astro.props;
+
+const gridColor = `rgba(196, 73, 0, ${opacity})`;
+const mask = `radial-gradient(ellipse at ${focusX} ${focusY}, black 30%, transparent 85%)`;
+---
+
+<div
+  class="grid-bg"
+  style={`
+    --cell-size: ${cellSize}px;
+    --grid-color: ${gridColor};
+    --mask: ${mask};
+  `}
+  aria-hidden="true"
+>
+</div>
+
+<style>
+  .grid-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image:
+      linear-gradient(var(--grid-color) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: var(--cell-size) var(--cell-size);
+    mask-image: var(--mask);
+    -webkit-mask-image: var(--mask);
+  }
+</style>

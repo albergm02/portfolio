@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { project, index } = Astro.props;
-const { title, description, year, category, stack, stack: techStack, status, links } = project.data;
+const { title, description, year, category, stack: techStack, status } = project.data;
 
 const categoryLabels: Record<string, string> = {
   web: 'Web',

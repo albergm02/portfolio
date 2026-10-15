@@ -1,0 +1,144 @@
+---
+import AuroraBackground from './AuroraBackground.astro';
+import { site } from '../data/site';
+
+interface Props {
+  variant?: 'summary' | 'full';
+}
+
+const { variant = 'summary' } = Astro.props;
+
+const topSkills = [
+  "Vue 3",
+  "Astro",
+  "TypeScript",
+  "Node.js",
+  "Firebase",
+  "Tailwind CSS",
+  "Debian",
+];
+
+// ─── Contenido según variante ───
+const content = {
+  summary: {
+    label: 'Sobre mí',
+    title: 'Ingeniero informático con foco en <span class="text-brand-orange">producto y detalle</span>.',
+    intro: 'Soy <strong class="font-semibold">Alberto García Martín</strong>, ingeniero informático por la Universidad de Salamanca.',
+    paragraphs: [
+      'Me apasiona construir software que se sienta bien: rápido, accesible y con una atención al detalle que se nota en cada interacción. Durante mi formación he trabajado en proyectos muy distintos entre sí, desde una <strong class="text-text-primary font-semibold">PWA completa de Fórmula 1</strong> desplegada en producción con backend en la nube, hasta administración de sistemas sobre Debian o aplicaciones de escritorio en C#.',
+      'Esa variedad me ha dado una visión <strong class="text-text-primary font-semibold">full stack</strong>: entiendo cómo encajan todas las piezas, desde la interfaz hasta la base de datos, y me he acostumbrado a adaptarme rápido a cualquier tecnología.',
+    ],
+    now: {
+      label: 'Ahora mismo',
+      paragraphs: [
+        'Estoy dando mis primeros pasos profesionales en el mundo de la <strong class="text-text-primary font-semibold">consultoría SAP</strong>, aprendiendo a trabajar con clientes reales bajo metodologías ágiles.',
+        'Me interesa tanto el <strong class="text-text-primary font-semibold">desarrollo frontend</strong> como el <strong class="text-text-primary font-semibold">backend</strong>: disfruto construyendo interfaces limpias, pero también diseñando APIs, modelando datos y peleándome con una configuración de servidor.',
+      ],
+    },
+  },
+  full: {
+    label: 'Sobre mí',
+    title: 'Construyo software <span class="text-brand-orange">como si fuera para mí</span>.',
+    intro: 'Hay una idea que repito mucho cuando trabajo: <strong class="font-semibold">si algo me molesta a mí, molestará a quien lo use</strong>.',
+    paragraphs: [
+      'Empecé a programar antes de saber que eso era una carrera. Lo que me enganchó no fue la sintaxis, sino la sensación de <strong class="text-text-primary font-semibold">resolver problemas reales</strong> con herramientas que yo mismo podía construir. Esa curiosidad es la que me llevó a la Ingeniería Informática en la Universidad de Salamanca, y la que sigue empujándome hoy.',
+      'Con los años he aprendido que el buen software no nace de la tecnología más moderna, sino de <strong class="text-text-primary font-semibold">entender bien el problema</strong> antes de escribir la primera línea. He trabajado en proyectos que van desde aplicaciones web con backend en la nube hasta servidores Debian configurados a mano, y en todos he aprendido lo mismo: los detalles marcan la diferencia entre algo que funciona y algo que se disfruta usando.',
+      'No me considero una persona de "un solo stack". Me gusta entender cómo encajan todas las piezas —frontend, backend, base de datos, infraestructura— porque creo que la mejor forma de tomar buenas decisiones técnicas es saber qué hay al otro lado.',
+    ],
+    now: {
+      label: 'Mi enfoque',
+      paragraphs: [
+        'Cuido la <strong class="text-text-primary font-semibold">experiencia de usuario</strong> tanto como la arquitectura. Me obsesionan los tiempos de carga, la accesibilidad y esos pequeños detalles que casi nadie nota conscientemente, pero que hacen que un producto se sienta bien.',
+        'Fuera del código, soy de los que lee documentación por diversión y desmonta cosas para ver cómo funcionan. Esa curiosidad es, al final, la que me mantiene aprendiendo.',
+      ],
+    },
+  },
+};
+
+const c = content[variant];
+---
+
+<section id="sobre-mi" class="relative px-6 lg:px-12 py-24 lg:py-32 overflow-hidden">
+
+  <!-- Fondo: Aurora teal sutil + Grano -->
+  <AuroraBackground variant="teal" intensity="low" />
+  <div class="absolute inset-0 grain-overlay z-[5]" aria-hidden="true"></div>
+
+  <div class="relative z-10 max-w-[1200px] mx-auto">
+
+    <!-- Cabecera -->
+    <div class="flex items-center gap-4 mb-8">
+      <span class="h-px w-12 bg-brand-orange" aria-hidden="true"></span>
+      <span class="text-xs font-mono uppercase tracking-[0.3em] text-brand-orange font-semibold">
+        {c.label}
+      </span>
+    </div>
+
+    <!-- Título -->
+    <h2 class="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] mb-12 max-w-4xl">
+      <Fragment set:html={c.title} />
+    </h2>
+
+    <!-- Grid principal -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+
+      <!-- Columna izquierda: bio -->
+      <div class="lg:col-span-7">
+        <p class="text-lg lg:text-xl text-text-primary leading-relaxed mb-6">
+          <Fragment set:html={c.intro} />
+        </p>
+        {c.paragraphs.map((p) => (
+          <p class="text-text-muted leading-relaxed mb-6">
+            <Fragment set:html={p} />
+          </p>
+        ))}
+
+        {variant === 'summary' && (
+          <a
+            href="/sobre-mi"
+            class="group inline-flex items-center gap-2 mt-8 text-sm font-medium text-brand-orange hover:gap-3 transition-all duration-300"
+          >
+            Conocer más sobre mí
+            <span aria-hidden="true">→</span>
+          </a>
+        )}
+      </div>
+
+      <!-- Columna derecha: bloque destacado + skills (solo en summary) -->
+      <div class="lg:col-span-5 space-y-6">
+
+        <div class="relative border border-border-subtle bg-bg-surface/40 p-6 lg:p-7">
+          <span class="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-brand-orange" aria-hidden="true"></span>
+
+          <p class="text-xs font-mono uppercase tracking-[0.25em] text-brand-orange mb-5">
+            {c.now.label}
+          </p>
+
+          {c.now.paragraphs.map((p, i) => (
+            <p class:list={["text-text-muted leading-relaxed", i < c.now.paragraphs.length - 1 && "mb-4"]}>
+              <Fragment set:html={p} />
+            </p>
+          ))}
+        </div>
+
+        {variant === 'summary' && (
+          <div class="border border-border-subtle bg-bg-surface/20 p-6 lg:p-7">
+            <p class="text-xs font-mono uppercase tracking-[0.25em] text-text-muted mb-4">
+              Herramientas habituales
+            </p>
+            <div class="flex flex-wrap gap-1.5">
+              {topSkills.map((skill) => (
+                <span class="text-[11px] font-mono uppercase tracking-wider text-text-muted bg-bg-elevated border border-border-subtle px-2 py-1 hover:border-brand-teal hover:text-brand-teal transition-colors">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+      </div>
+
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,11 @@
+# robots.txt para albertogm.dev
+# Portfolio de Alberto García Martín
+
+User-agent: *
+Allow: /
+
+# Bloquear rutas que no deberían indexarse
+Disallow: /404
+
+# Sitemap
+Sitemap: https://albertogm.dev/sitemap-index.xml

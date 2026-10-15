@@ -2,7 +2,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import HeroBackground from '../components/HeroBackground.astro';
+import AuroraBackground from '../components/AuroraBackground.astro';
+import GridBackground from '../components/GridBackground.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import AboutSection from '../components/AboutSection.astro';
 import { site } from '../data/site';
 import { getCollection } from 'astro:content';
 
@@ -16,34 +19,58 @@ const featuredProjects = (await getCollection('projects', ({ data }) => data.fea
 <BaseLayout>
   <Header />
 
+  <!-- ══════════════════════════════════════════════════════════════
+       SECCIÓN 1 — HERO
+       Fondo: Aurora (full, high) + Grid + Streaks + Grano
+       ══════════════════════════════════════════════════════════════ -->
   <main class="relative min-h-screen overflow-hidden flex flex-col">
-    <HeroBackground />
-    <div class="absolute inset-0 grain-overlay z-[5]"></div>
-    <div class="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-bg-primary via-bg-primary/60 to-transparent pointer-events-none z-[6]"></div>
 
+    <!-- Capas de fondo (de atrás hacia delante) -->
+    <AuroraBackground variant="full" intensity="high" />
+    <GridBackground cellSize={64} opacity={0.07} focusX="50%" focusY="40%" />
+    <HeroBackground />
+    <div class="absolute inset-0 grain-overlay z-[5]" aria-hidden="true"></div>
+
+    <!-- Degradado inferior para fundir con la siguiente sección -->
+    <div
+      class="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-bg-primary via-bg-primary/60 to-transparent pointer-events-none z-[6]"
+      aria-hidden="true"
+    ></div>
+
+    <!-- Contenido del Hero -->
     <div class="relative z-10 flex-1 w-full max-w-[1500px] mx-auto px-6 lg:px-12 pt-24 lg:pt-28 pb-16 flex flex-col justify-center">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
 
-        <!-- ══════ COLUMNA IZQUIERDA: TEXTO ══════ -->
+        <!-- ─── Columna izquierda: texto ─── -->
         <div class="lg:col-span-7 order-2 lg:order-1">
 
-          <!-- Etiqueta de rol -->
+          <!-- Etiqueta de rol + Full Stack -->
           <div class="flex items-center gap-4 mb-6 hero-fade" style="--delay: 0ms">
             <span class="h-px w-12 bg-brand-orange"></span>
             <span class="text-xs font-mono uppercase tracking-[0.3em] text-brand-orange font-semibold">
               {site.role}
             </span>
+            <span class="w-1 h-1 rounded-full bg-border-subtle"></span>
+            <span class="text-xs font-mono uppercase tracking-[0.3em] text-text-muted font-medium">
+              Full Stack
+            </span>
           </div>
 
-          <!-- Nombre -->
+          <!-- Nombre (con reveal tipo máscara) -->
           <h1 class="font-display font-bold tracking-tighter text-text-primary">
             <span class="block overflow-hidden py-1">
-              <span class="hero-line block leading-[0.85]" style="--delay: 100ms; font-size: clamp(3.5rem, 9vw, 8rem);">
+              <span
+                class="hero-line block leading-[0.85]"
+                style="--delay: 100ms; font-size: clamp(3.5rem, 9vw, 8rem);"
+              >
                 {firstName}
               </span>
             </span>
             <span class="block overflow-hidden py-1">
-              <span class="hero-line block leading-[0.85]" style="--delay: 220ms; font-size: clamp(3.5rem, 9vw, 8rem);">
+              <span
+                class="hero-line block leading-[0.85]"
+                style="--delay: 220ms; font-size: clamp(3.5rem, 9vw, 8rem);"
+              >
                 {lastName}
               </span>
             </span>
@@ -54,7 +81,7 @@ const featuredProjects = (await getCollection('projects', ({ data }) => data.fea
             {site.tagline}
           </p>
 
-          <!-- Botones -->
+          <!-- Botones de acción -->
           <div class="mt-10 flex flex-wrap items-center gap-4 hero-fade" style="--delay: 620ms">
             <a
               href="/proyectos"
@@ -75,8 +102,7 @@ const featuredProjects = (await getCollection('projects', ({ data }) => data.fea
 
         </div>
 
-        <!-- ══════ COLUMNA DERECHA: FOTO ENMARCADA ══════ -->
-                <!-- ══════ COLUMNA DERECHA: FOTO ENMARCADA ══════ -->
+        <!-- ─── Columna derecha: foto enmarcada ─── -->
         <div class="lg:col-span-5 order-1 lg:order-2 flex justify-center lg:justify-end">
 
           <div class="hero-photo relative w-full max-w-[440px] lg:max-w-[500px] lg:-mt-16">
@@ -87,7 +113,7 @@ const featuredProjects = (await getCollection('projects', ({ data }) => data.fea
               <div class="absolute inset-10 rounded-full bg-brand-orange/15 blur-[100px]"></div>
             </div>
 
-            <!-- Marco principal (sin padding: la foto llega a los bordes) -->
+            <!-- Marco principal -->
             <div class="relative border border-brand-orange/40 bg-bg-surface/20 overflow-hidden">
 
               <!-- Esquinas reforzadas -->
@@ -100,11 +126,11 @@ const featuredProjects = (await getCollection('projects', ({ data }) => data.fea
               <span class="absolute top-2 left-2 w-1.5 h-1.5 rounded-full bg-brand-orange z-20" aria-hidden="true"></span>
               <span class="absolute bottom-2 right-2 w-1.5 h-1.5 rounded-full bg-brand-orange z-20" aria-hidden="true"></span>
 
-              <!-- La foto con glow naranja que abraza la silueta -->
+              <!-- Foto con glow naranja que abraza la silueta -->
               <img
                 src="/images/alberto-cutout.png"
                 alt="Retrato de Alberto García Martín"
-                class="w-full h-auto select-none pointer-events-none relative z-10 scale-[1] origin-bottom"
+                class="w-full h-auto select-none pointer-events-none relative z-10 origin-bottom"
                 loading="eager"
                 draggable="false"
                 style="filter: drop-shadow(0 0 25px rgba(196, 73, 0, 0.55)) drop-shadow(0 0 60px rgba(196, 73, 0, 0.25));"
@@ -117,13 +143,22 @@ const featuredProjects = (await getCollection('projects', ({ data }) => data.fea
 
       </div>
     </div>
+
   </main>
 
-    <!-- ══════════════ SECCIÓN PROYECTOS ══════════════ -->
-  <section id="proyectos" class="relative px-6 lg:px-12 py-24 lg:py-32">
-    <div class="max-w-[1500px] mx-auto">
+  <!-- ══════════════════════════════════════════════════════════════
+       SECCIÓN 2 — PROYECTOS DESTACADOS
+       Fondo: Grid sutil desplazado + Grano
+       ══════════════════════════════════════════════════════════════ -->
+  <section id="proyectos" class="relative px-6 lg:px-12 py-24 lg:py-32 overflow-hidden">
 
-      <!-- Cabecera de la sección -->
+    <!-- Fondo: cuadrícula sutil con foco desplazado para no repetir el Hero -->
+    <GridBackground cellSize={80} opacity={0.045} focusX="30%" focusY="50%" />
+    <div class="absolute inset-0 grain-overlay z-[5]" aria-hidden="true"></div>
+
+    <div class="relative z-10 max-w-[1500px] mx-auto">
+
+      <!-- Cabecera de sección -->
       <div class="flex items-end justify-between mb-16 border-b border-border-subtle pb-6">
         <div>
           <div class="flex items-center gap-4 mb-4">
@@ -166,45 +201,58 @@ const featuredProjects = (await getCollection('projects', ({ data }) => data.fea
 
     </div>
   </section>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SECCIÓN 3 — SOBRE MÍ
+       Fondo gestionado internamente por AboutSection.astro
+       (Aurora teal + Grano)
+       ══════════════════════════════════════════════════════════════ -->
+  <AboutSection />
+
 </BaseLayout>
 
 <script>
   import { animate, stagger } from 'animejs';
 
-  // Esperamos a que las fuentes estén listas para evitar saltos
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(startHeroAnimations);
-  } else {
-    window.addEventListener('load', startHeroAnimations);
-  }
-
+  /**
+   * Animaciones de entrada del Hero.
+   * Se ejecutan cuando las fuentes están cargadas, para que las
+   * métricas tipográficas sean las definitivas y no haya saltos.
+   */
   function startHeroAnimations() {
-    // 1. Animamos las líneas del nombre (con stagger automático)
+    // 1. Líneas del nombre (reveal tipo "máscara" con stagger)
     animate('.hero-line', {
       translateY: ['110%', '0%'],
       opacity: [0, 1],
       duration: 1100,
       ease: 'outExpo',
-      delay: stagger(120, { start: 100 })
+      delay: stagger(120, { start: 100 }),
     });
 
-    // 2. Animamos los elementos con fade (etiqueta, tagline, botones)
+    // 2. Elementos con fade (etiqueta, tagline, botones)
     animate('.hero-fade', {
       translateY: [24, 0],
       opacity: [0, 1],
       duration: 900,
       ease: 'outExpo',
-      delay: stagger(180, { start: 500 })
+      delay: stagger(180, { start: 500 }),
     });
 
-    // 3. Animamos la foto (con un pequeño retraso)
+    // 3. Foto con entrada suave
     animate('.hero-photo', {
       translateY: [50, 0],
       scale: [0.96, 1],
       opacity: [0, 1],
       duration: 1400,
       ease: 'outExpo',
-      delay: 300
+      delay: 300,
     });
+  }
+
+  // Punto de entrada: esperamos a las fuentes si están disponibles
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(startHeroAnimations);
+  } else {
+    window.addEventListener('load', startHeroAnimations);
   }
 </script>

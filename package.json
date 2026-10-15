@@ -12,10 +12,14 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@astrojs/sitemap": "^3.7.4",
     "@tailwindcss/vite": "^4.3.3",
     "animejs": "^4.5.0",
     "astro": "^7.3.8",
-    "tailwindcss": "^4.3.3"
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@types/animejs": "^3.1.13"
