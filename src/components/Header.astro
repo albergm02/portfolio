@@ -1,0 +1,55 @@
+---
+const navLinks = [
+  { href: '/', label: 'Inicio' },
+  { href: '/proyectos', label: 'Proyectos' },
+  { href: '/sobre-mi', label: 'Sobre mí' },
+  { href: '/contacto', label: 'Contacto' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header
+  transition:persist
+  class="fixed top-0 left-0 right-0 z-50 bg-bg-primary/80 backdrop-blur-md border-b border-border-subtle"
+>
+  <nav class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
+    <!-- Logo / Marca -->
+    <a
+    href="/"
+    class="group inline-flex items-center gap-2 rounded-full border border-border-subtle px-4 py-2 text-sm font-medium text-text-primary hover:border-brand-orange hover:text-brand-orange transition-colors"
+    >
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:-translate-x-0.5">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+    </svg>
+    Inicio
+    </a>
+
+    <!-- Enlaces de navegación -->
+    <ul class="hidden md:flex items-center gap-8">
+      {navLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class:list={[
+              "text-sm font-medium transition-colors",
+              currentPath === link.href
+                ? "text-brand-orange"
+                : "text-text-muted hover:text-text-primary"
+            ]}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- Botón de contacto (CTA) -->
+    <a
+      href="mailto:alberto.g.m.0214@gmail.com"
+      class="hidden md:inline-flex items-center gap-2 rounded-full border border-brand-orange px-4 py-2 text-sm font-medium text-brand-orange hover:bg-brand-orange hover:text-white transition-colors"
+    >
+      Hablemos
+    </a>
+  </nav>
+</header>

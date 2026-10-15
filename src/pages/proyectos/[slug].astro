@@ -1,0 +1,225 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import { getCollection, render } from 'astro:content';
+
+// getStaticPaths le dice a Astro qué páginas generar en build time
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { title, description, year, category, stack, status, links, highlights } = project.data;
+const { Content } = await render(project);
+
+const categoryLabels: Record<string, string> = {
+  web: 'Web',
+  desktop: 'Desktop',
+  systems: 'SysAdmin',
+  security: 'Security',
+  game: 'Game',
+  data: 'Data',
+};
+
+const statusLabels: Record<string, string> = {
+  deployed: 'Desplegado',
+  academic: 'Académico',
+  wip: 'En desarrollo',
+};
+
+const prevProject = null; // simplificado; ver nota al final
+---
+
+<BaseLayout title={`${title} — Alberto GM`} description={description}>
+  <Header />
+
+  <main class="relative min-h-screen pt-32 pb-24 px-6 lg:px-12">
+    <div class="max-w-5xl mx-auto">
+
+      <!-- Botón volver -->
+      <a
+        href="/proyectos"
+        class="group inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-text-muted hover:text-brand-orange transition-colors mb-12"
+      >
+        <span class="transition-transform group-hover:-translate-x-1">←</span>
+        Volver a proyectos
+      </a>
+
+      <!-- Cabecera del proyecto -->
+      <header class="mb-12 border-b border-border-subtle pb-8">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="text-xs font-mono uppercase tracking-[0.2em] text-brand-orange border border-brand-orange/40 px-3 py-1">
+            {categoryLabels[category] ?? category}
+          </span>
+          <span class="text-xs font-mono text-text-muted">{year}</span>
+          <span class="w-1 h-1 rounded-full bg-border-subtle"></span>
+          <span class="text-xs font-mono text-text-muted">{statusLabels[status] ?? status}</span>
+        </div>
+
+        <h1 class="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05]">
+          {title}
+        </h1>
+
+        <p class="mt-6 text-lg text-text-muted leading-relaxed max-w-3xl">
+          {description}
+        </p>
+
+        <!-- Botones de enlace -->
+        {(links?.repo || links?.demo) && (
+          <div class="mt-8 flex flex-wrap gap-3">
+            {links.demo && (
+              <a
+                href={links.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group inline-flex items-center gap-2 rounded-full bg-brand-orange px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-orange/90 transition-colors"
+              >
+                Ver demo
+                <span class="transition-transform group-hover:translate-x-0.5" aria-hidden="true">↗</span>
+              </a>
+            )}
+            {links.repo && (
+              <a
+                href={links.repo}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group inline-flex items-center gap-2 rounded-full border border-border-subtle px-5 py-2.5 text-sm font-semibold hover:border-brand-teal hover:text-brand-teal transition-colors"
+              >
+                Repositorio
+                <span class="transition-transform group-hover:translate-x-0.5" aria-hidden="true">↗</span>
+              </a>
+            )}
+          </div>
+        )}
+      </header>
+
+      <!-- Grid de dos columnas: contenido + sidebar -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+
+        <!-- Contenido principal (Markdown renderizado) -->
+        <article class="lg:col-span-8 prose-custom">
+          <Content />
+        </article>
+
+        <!-- Sidebar con highlights y stack -->
+        <aside class="lg:col-span-4 space-y-8">
+
+          <!-- Highlights -->
+          {highlights.length > 0 && (
+            <div class="border border-border-subtle bg-bg-surface/40 p-6">
+              <h3 class="text-xs font-mono uppercase tracking-[0.2em] text-brand-orange mb-4">
+                Logros clave
+              </h3>
+              <ul class="space-y-3">
+                {highlights.map((h) => (
+                  <li class="flex gap-3 text-sm text-text-muted leading-relaxed">
+                    <span class="text-brand-orange shrink-0 mt-1.5">▹</span>
+                    <span>{h}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <!-- Stack completo -->
+          <div class="border border-border-subtle bg-bg-surface/40 p-6">
+            <h3 class="text-xs font-mono uppercase tracking-[0.2em] text-brand-orange mb-4">
+              Stack
+            </h3>
+            <div class="flex flex-wrap gap-1.5">
+              {stack.map((tech) => (
+                <span class="text-[11px] font-mono uppercase tracking-wider text-text-muted bg-bg-elevated border border-border-subtle px-2 py-1">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+
+        </aside>
+      </div>
+
+    </div>
+  </main>
+</BaseLayout>
+
+<style is:global>
+  /* Estilos para el contenido Markdown renderizado */
+  .prose-custom h2 {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-text-primary);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose-custom h2:first-child {
+    margin-top: 0;
+  }
+
+  .prose-custom h3 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .prose-custom p {
+    color: var(--color-text-muted);
+    line-height: 1.75;
+    margin-bottom: 1.25rem;
+  }
+
+  .prose-custom strong {
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
+
+  .prose-custom ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.25rem;
+  }
+
+  .prose-custom ul li {
+    color: var(--color-text-muted);
+    line-height: 1.75;
+    padding-left: 1.5rem;
+    position: relative;
+    margin-bottom: 0.5rem;
+  }
+
+  .prose-custom ul li::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    color: var(--color-brand-orange);
+  }
+
+  .prose-custom a {
+    color: var(--color-brand-orange);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: opacity 0.2s;
+  }
+
+  .prose-custom a:hover {
+    opacity: 0.8;
+  }
+
+  .prose-custom code {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    background-color: var(--color-bg-elevated);
+    color: var(--color-brand-sky);
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+  }
+</style>

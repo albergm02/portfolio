@@ -1,13 +1,210 @@
 ---
-import '../styles/global.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import HeroBackground from '../components/HeroBackground.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { site } from '../data/site';
+import { getCollection } from 'astro:content';
+
+const [firstName, ...lastNameParts] = site.name.split(' ');
+const lastName = lastNameParts.join(' ');
+
+const featuredProjects = (await getCollection('projects', ({ data }) => data.featured))
+  .sort((a, b) => a.data.order - b.data.order);
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Mi Portfolio</title>
-  </head>
-  <body>
-    <h1 class="text-4xl font-bold text-blue-600">Mi Portfolio</h1>
-  </body>
-</html>
+<BaseLayout>
+  <Header />
+
+  <main class="relative min-h-screen overflow-hidden flex flex-col">
+    <HeroBackground />
+    <div class="absolute inset-0 grain-overlay z-[5]"></div>
+    <div class="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-bg-primary via-bg-primary/60 to-transparent pointer-events-none z-[6]"></div>
+
+    <div class="relative z-10 flex-1 w-full max-w-[1500px] mx-auto px-6 lg:px-12 pt-24 lg:pt-28 pb-16 flex flex-col justify-center">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+
+        <!-- ══════ COLUMNA IZQUIERDA: TEXTO ══════ -->
+        <div class="lg:col-span-7 order-2 lg:order-1">
+
+          <!-- Etiqueta de rol -->
+          <div class="flex items-center gap-4 mb-6 hero-fade" style="--delay: 0ms">
+            <span class="h-px w-12 bg-brand-orange"></span>
+            <span class="text-xs font-mono uppercase tracking-[0.3em] text-brand-orange font-semibold">
+              {site.role}
+            </span>
+          </div>
+
+          <!-- Nombre -->
+          <h1 class="font-display font-bold tracking-tighter text-text-primary">
+            <span class="block overflow-hidden py-1">
+              <span class="hero-line block leading-[0.85]" style="--delay: 100ms; font-size: clamp(3.5rem, 9vw, 8rem);">
+                {firstName}
+              </span>
+            </span>
+            <span class="block overflow-hidden py-1">
+              <span class="hero-line block leading-[0.85]" style="--delay: 220ms; font-size: clamp(3.5rem, 9vw, 8rem);">
+                {lastName}
+              </span>
+            </span>
+          </h1>
+
+          <!-- Tagline -->
+          <p class="mt-8 text-lg md:text-xl text-text-muted max-w-lg leading-relaxed hero-fade" style="--delay: 480ms">
+            {site.tagline}
+          </p>
+
+          <!-- Botones -->
+          <div class="mt-10 flex flex-wrap items-center gap-4 hero-fade" style="--delay: 620ms">
+            <a
+              href="/proyectos"
+              class="group inline-flex items-center gap-2 rounded-full bg-brand-orange px-7 py-3.5 text-sm font-semibold text-white hover:bg-brand-orange/90 transition-all duration-300"
+            >
+              Ver proyectos
+              <span class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
+            </a>
+            <a
+              href={site.socials.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 rounded-full border border-border-subtle px-7 py-3.5 text-sm font-semibold text-text-primary hover:border-brand-teal hover:text-brand-teal transition-colors duration-300"
+            >
+              GitHub
+            </a>
+          </div>
+
+        </div>
+
+        <!-- ══════ COLUMNA DERECHA: FOTO ENMARCADA ══════ -->
+                <!-- ══════ COLUMNA DERECHA: FOTO ENMARCADA ══════ -->
+        <div class="lg:col-span-5 order-1 lg:order-2 flex justify-center lg:justify-end">
+
+          <div class="hero-photo relative w-full max-w-[440px] lg:max-w-[500px] lg:-mt-16">
+
+            <!-- Halo de luz detrás del marco -->
+            <div class="absolute -inset-12 -z-10" aria-hidden="true">
+              <div class="absolute inset-0 rounded-full bg-brand-orange/20 blur-[130px]"></div>
+              <div class="absolute inset-10 rounded-full bg-brand-orange/15 blur-[100px]"></div>
+            </div>
+
+            <!-- Marco principal (sin padding: la foto llega a los bordes) -->
+            <div class="relative border border-brand-orange/40 bg-bg-surface/20 overflow-hidden">
+
+              <!-- Esquinas reforzadas -->
+              <span class="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-brand-orange z-20" aria-hidden="true"></span>
+              <span class="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-brand-orange z-20" aria-hidden="true"></span>
+              <span class="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-brand-orange z-20" aria-hidden="true"></span>
+              <span class="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-brand-orange z-20" aria-hidden="true"></span>
+
+              <!-- Nodos decorativos -->
+              <span class="absolute top-2 left-2 w-1.5 h-1.5 rounded-full bg-brand-orange z-20" aria-hidden="true"></span>
+              <span class="absolute bottom-2 right-2 w-1.5 h-1.5 rounded-full bg-brand-orange z-20" aria-hidden="true"></span>
+
+              <!-- La foto con glow naranja que abraza la silueta -->
+              <img
+                src="/images/alberto-cutout.png"
+                alt="Retrato de Alberto García Martín"
+                class="w-full h-auto select-none pointer-events-none relative z-10 scale-[1] origin-bottom"
+                loading="eager"
+                draggable="false"
+                style="filter: drop-shadow(0 0 25px rgba(196, 73, 0, 0.55)) drop-shadow(0 0 60px rgba(196, 73, 0, 0.25));"
+              />
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+    <!-- ══════════════ SECCIÓN PROYECTOS ══════════════ -->
+  <section id="proyectos" class="relative px-6 lg:px-12 py-24 lg:py-32">
+    <div class="max-w-[1500px] mx-auto">
+
+      <!-- Cabecera de la sección -->
+      <div class="flex items-end justify-between mb-16 border-b border-border-subtle pb-6">
+        <div>
+          <div class="flex items-center gap-4 mb-4">
+            <span class="h-px w-12 bg-brand-orange"></span>
+            <span class="text-xs font-mono uppercase tracking-[0.3em] text-brand-orange font-semibold">
+              Trabajo seleccionado
+            </span>
+          </div>
+          <h2 class="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+            Proyectos<span class="text-brand-orange">.</span>
+          </h2>
+        </div>
+
+        <a
+          href="/proyectos"
+          class="hidden md:inline-flex items-center gap-2 text-sm font-medium text-text-muted hover:text-brand-orange transition-colors"
+        >
+          Ver todos
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+
+      <!-- Grid de tarjetas -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {featuredProjects.map((project, index) => (
+          <ProjectCard project={project} index={index} />
+        ))}
+      </div>
+
+      <!-- Link móvil -->
+      <div class="mt-10 md:hidden">
+        <a
+          href="/proyectos"
+          class="inline-flex items-center gap-2 text-sm font-medium text-brand-orange"
+        >
+          Ver todos los proyectos
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  import { animate, stagger } from 'animejs';
+
+  // Esperamos a que las fuentes estén listas para evitar saltos
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(startHeroAnimations);
+  } else {
+    window.addEventListener('load', startHeroAnimations);
+  }
+
+  function startHeroAnimations() {
+    // 1. Animamos las líneas del nombre (con stagger automático)
+    animate('.hero-line', {
+      translateY: ['110%', '0%'],
+      opacity: [0, 1],
+      duration: 1100,
+      ease: 'outExpo',
+      delay: stagger(120, { start: 100 })
+    });
+
+    // 2. Animamos los elementos con fade (etiqueta, tagline, botones)
+    animate('.hero-fade', {
+      translateY: [24, 0],
+      opacity: [0, 1],
+      duration: 900,
+      ease: 'outExpo',
+      delay: stagger(180, { start: 500 })
+    });
+
+    // 3. Animamos la foto (con un pequeño retraso)
+    animate('.hero-photo', {
+      translateY: [50, 0],
+      scale: [0.96, 1],
+      opacity: [0, 1],
+      duration: 1400,
+      ease: 'outExpo',
+      delay: 300
+    });
+  }
+</script>

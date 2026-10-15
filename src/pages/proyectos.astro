@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+// Traemos TODOS los proyectos, ordenados por el campo 'order'
+const allProjects = (await getCollection('projects'))
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="Proyectos — Alberto GM"
+  description="Selección de proyectos desarrollados por Alberto García Martín: aplicaciones web, sistemas, seguridad y desarrollo de software."
+>
+  <Header />
+
+  <main class="relative min-h-screen pt-40 lg:pt-44 pb-24 px-6 lg:px-12">
+    <div class="max-w-[1500px] mx-auto">
+
+      <!-- Cabecera -->
+      <div class="mb-16 border-b border-border-subtle pb-8">
+        <div class="flex items-center gap-4 mb-4">
+          <span class="h-px w-12 bg-brand-orange"></span>
+          <span class="text-xs font-mono uppercase tracking-[0.3em] text-brand-orange font-semibold">
+            Archivo completo
+          </span>
+        </div>
+        <h1 class="font-display text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
+          Proyectos<span class="text-brand-orange">.</span>
+        </h1>
+        <p class="mt-4 text-text-muted max-w-2xl">
+          Una selección de trabajos desarrollados durante el grado y fuera del aula. Desde aplicaciones web con backend en la nube hasta administración de sistemas y videojuegos.
+        </p>
+      </div>
+
+      <!-- Grid de tarjetas -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {allProjects.map((project, index) => (
+          <ProjectCard project={project} index={index} />
+        ))}
+      </div>
+
+    </div>
+  </main>
+  <script>
+    import { animate, onScroll, stagger } from 'animejs';
+
+    function initProjectAnimations() {
+      // Estado inicial: las tarjetas están ocultas y desplazadas abajo
+      const cards = document.querySelectorAll('.project-card');
+      cards.forEach((card) => {
+        (card as HTMLElement).style.opacity = '0';
+        (card as HTMLElement).style.transform = 'translateY(60px)';
+      });
+
+      // Animamos cuando el contenedor de tarjetas entra en el viewport
+      animate('.project-card', {
+        opacity: [0, 1],
+        translateY: [60, 0],
+        duration: 900,
+        ease: 'outExpo',
+        delay: stagger(120),
+        // onScroll: se dispara al hacer scroll
+        autoplay: onScroll({
+          target: '.project-card',
+          enter: 'bottom-=100 top',
+          // leave: 'top bottom',
+          sync: true, // sincroniza la animación con el scroll
+        }),
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initProjectAnimations);
+    } else {
+      initProjectAnimations();
+    }
+  </script>
+</BaseLayout>
